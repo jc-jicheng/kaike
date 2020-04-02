@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <!-- <p v-show="isShow">可以给你看见</p>
+
+        <hr>
+
+        <p v-if="isShow">可以给你看见</p>
+
+        <hr> -->
+
+        <div v-if="isLogin">
+            <a href="">zMouse</a>
+            <span> | </span>
+            <a href="">退出</a>
+        </div>
+        <!-- <hr /> -->
+        <div v-else>
+            <a href="">注册</a>
+            <span> | </span>
+            <a href="">登录</a>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            // template: `
+            //     <div v-if="isLogin">
+            //         <a href="">zMouse</a>
+            //         <span> | </span>
+            //         <a href="">退出</a>
+            //     </div>
+            //     <div v-else>
+            //         <a href="">注册</a>
+            //         <span> | </span>
+            //         <a href="">登录</a>
+            //     </div>
+            // `,
+            data: {
+                isShow: true,
+                isLogin: true
+            }
+        });
+
+    </script>
+</body>
+</html>

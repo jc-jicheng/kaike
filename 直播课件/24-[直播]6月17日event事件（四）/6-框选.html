@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div {
+            margin: 20px;
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            font-size: 30px;
+        }
+        .active {
+            background: green;
+        }
+        .box {
+            position: fixed;
+            border: 1px solid blue;
+            background: rgba(0,0,255,.2);
+        }
+        .box2 {
+            border: 2px solid #000;
+            min-height: 200px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="box2"></div>
+<script>
+{
+    [...(".".repeat(15))].forEach((item,index)=>{
+        document.write(`<div class="div">${(index+1)}</div>`);
+    });
+}
+</script>    
+<script>
+{
+    let mouseStart = {};
+    let box = null;
+    let div = document.querySelectorAll(".div");
+    let box2 = document.querySelector(".box2");
+    // 找到新的鼠标位置,计算鼠标移动距离
+    let move = (e)=>{
+        let mouseNow = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        let dis = {
+            x: mouseNow.x - mouseStart.x,
+            y: mouseNow.y - mouseStart.y
+        };
+        box.style.left = Math.min(mouseStart.x,mouseNow.x) + "px";
+        box.style.top = Math.min(mouseStart.y,mouseNow.y) + "px";
+        box.style.width = Math.abs(dis.x) + "px";
+        box.style.height = Math.abs(dis.y) + "px";
+        div.forEach((item)=>{
+            if(isContactRect(item,box)){
+                item.classList.add("active");
+            } else {
+                item.classList.remove("active");
+            }
+        });
+    };
+    // 鼠标按下记录鼠标的坐标
+    document.addEventListener("mousedown",function(e){
+        // e.button 当前的鼠标按键 0 左键  1 滚轮  2 右键
+        if(e.button !== 0){
+            return ;
+        }
+        mouseStart = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        box = document.createElement("div");
+        box.classList.add("box");
+        document.body.appendChild(box);
+        document.addEventListener("mousemove",move);
+        e.preventDefault();
+        document.addEventListener("mouseup",()=>{
+            document.removeEventListener("mousemove",move);
+            document.body.removeChild(box);
+            let actives = document.querySelectorAll(".active");
+            console.log(actives);
+            actives.forEach(item=>{
+                // let newNode = item.cloneNode(true);
+                // box2.appendChild(newNode);
+                box2.appendChild(item);
+            });
+        },{once:true});
+    });
+}
+function isContactRect(el,el2){
+    let elRect = el.getBoundingClientRect();
+    let el2Rect = el2.getBoundingClientRect();
+    if(
+        elRect.right <  el2Rect.left
+        || el2Rect.right <  elRect.left
+        || elRect.bottom <  el2Rect.top
+        || el2Rect.bottom <  elRect.top
+    ){
+        return false;
+    } 
+    return true;
+}
+</script>
+</body>
+</html>

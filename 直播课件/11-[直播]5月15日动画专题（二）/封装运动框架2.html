@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script src="tween.js"></script>
+    <script>
+        // div鼠标移入时 宽度从原来的200px 匀速 变成300px 用1秒时间
+        // 
+        // console.log(Tween);
+
+        // 运动其实是有固定次数的
+        // t, b, c, d
+        // t  cureent time (当前运动的时间 - 当前运动次数)
+        // b  beginning value （运动样式的初始值）200
+        // c  change in value （运动距离）目标值-初始值 = 运动距离
+        // d  duration （总运动时间 - 总运动次数）
+
+        var div=document.querySelector('div');
+        var timer=null;
+
+        function css(el,attr,val){
+            if(val==undefined){
+                return parseFloat(getComputedStyle(el)[attr]);
+            }
+            // 设置哪些样式
+            // el.style[attr]=val+'px';
+            switch(attr){
+                case 'opacity':
+                case 'zIndex' :
+                    el.style[attr]=val;
+                break;
+                default:
+                    el.style[attr]=val+'px';
+            }
+        }
+
+
+        // 鼠标移入事件
+        div.addEventListener('mouseover',function(){
+            // 运动框架调用
+            move({
+                el:div,
+                attr:'height',
+                time:1000,
+                target:600,
+                type:'easeOut'
+            })  
+        });
+
+
+        // move(el,attr,target,time,type)
+        //2.0 move(options)
+        /* 
+           options={
+                el:div,
+                attr:'height',
+                time:1000,
+                target:600,
+                type:'easeOut'
+            }
+        */ 
+        /* 
+            el 运动元素
+            attr 运动样式
+            target 运动目标值
+            time 运动时间
+            type 运动形式
+        */
+        function move(op){
+            // 设定一次运动需要多长时间(设置每秒运动60次)
+            // 原因：requestAnimationFrame刷新频次一致
+            var dely=1000/60;
+            // 声明运动时间
+            op.time=op.time||1000;
+            // 用定时器将T不断累加
+            var t=0;  //当前运动次数
+            var b=css(op.el,op.attr);
+            var c=op.target-b; //目标值-初始值
+            var d=Math.ceil(op.time/dely); //运动总次数
+            timer=setInterval(function(){
+                t++;
+                // 停止条件
+                if(t>d){
+                    clearInterval(timer);
+                    return;
+                }
+                // 当前的运动值
+                var val=Tween[op.type](t,b,c,d);
+                css(op.el,op.attr,val);
+            },dely)
+        }
+
+
+    </script>
+</body>
+</html>

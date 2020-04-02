@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // this
+    
+        function fn1(x, y) {
+            console.log(this);
+            console.log('x', x);
+            console.log('y', y);
+        }
+
+        // fn1();
+
+        // document.onclick = fn1;
+
+        // let obj = {
+        //     a: 1,
+        //     f: fn1
+        // }
+
+        // obj.f();
+
+        let arr = [1,2,3];
+
+        // let fn2 = fn1.bind(arr);
+
+        
+
+        let fn2 = bind(fn1, arr);
+
+        fn2(1, 2);
+        // document.onclick = fn2;
+        let obj = {
+            a: 1,
+            f: fn2
+        }
+        // obj.f();
+
+
+        function bind(f, context) {
+            return function(...args) {
+                f.call(context, ...args);
+            }
+        }
+
+    </script>
+</body>
+</html>

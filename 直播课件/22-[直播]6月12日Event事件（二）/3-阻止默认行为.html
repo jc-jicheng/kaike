@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <p>阻止默认行为</p>
+    <a href="http://www.baidu.com">跳转</a> 
+    <input type="text" />  
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+    <div>文字文字文字</div> 
+<script>
+// return false 在事件函数中 return false 就会阻止默认行为
+// e.preventDefault();// 阻止默认事件
+{
+    // 绑定事件函数
+    // window.oncontextmenu=function(){
+    //     console.log(1);
+    //     return false; 
+    // };
+    window.addEventListener("contextmenu",function(e){
+        e.preventDefault();// 阻止默认事件
+    });
+    /*
+        mousedown 鼠标摁下
+        mouseup 鼠标抬起
+    */
+    document.addEventListener("mousedown",function(e){
+        e.preventDefault();
+    });
+    document.addEventListener("click",function(e){
+        e.preventDefault();
+    })
+    // document.addEventListener("mouseup",function(){
+    //     console.log(2);
+    // })
+}
+</script>    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 获取日期对象
+        var date=new Date();
+        // console.log(date)
+        // Mon May 06 2019 21:59:37 GMT+0800 (中国标准时间)
+        // 2019-05-06 21:59:37
+        var year=date.getFullYear();
+        // 获取的数字 比真正的时间晚一个月（从0开始）
+        var month=date.getMonth()+1;
+        var day=date.getDate();
+        // 星期 0（星期日） 1 2 3 4 5 6 
+        var week=date.getDay();
+        var hour=date.getHours();
+        var min=date.getMinutes();
+        var sec=date.getSeconds();
+        var milsec=date.getMilliseconds();
+
+        console.log(year,month,day,week,hour,min,sec,milsec);
+
+
+    </script>
+</body>
+</html>

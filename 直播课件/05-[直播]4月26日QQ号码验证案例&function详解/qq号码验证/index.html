@@ -1,0 +1,80 @@
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="box">
+      <input type="text" />
+      <input type="button" value="验证" />
+      <div class="validate">
+        <div class="arrow"><em></em><span></span></div>
+        <!-- 付款成功后请点击 "我已付款" -->
+        <div class="text" style="color: white;">请输入5-10位数字</div>
+      </div>
+    </div>
+
+    <script>
+      // 1. 给验证按钮添加点击事件
+      // 2. 根据文本框的值 去显示对应的提示文字
+      // 3. 内容是否为空
+      // 4. 输入是否为数字 不是数字 -> isNaN();
+      // 5. 5-10位 txt string.length 获取字符串的长度
+      // 6. 首字母不能是0 先获取首字母 用下标的形式获取某个字符[0]
+      // 7. 请不要输入小数
+
+      var str='abcde';
+      // console.log(str.length);
+      // console.log(str[0]);
+
+      var btn=document.querySelectorAll('input')[1];
+      var txt=document.querySelectorAll('input')[0];
+      var validate=document.querySelector('.validate');
+      var text=document.querySelector('.text');
+
+      btn.onclick=function(){
+
+        validate.style.display='block';
+        //获取文本框值
+        var val=txt.value;
+
+        // 内容是否为空
+        if(val==''){
+          // alert('文本为空');
+          text.innerHTML='文本不能为空';
+        }else if(isNaN(val)){
+          // isNaN() 方法  -> true/false 
+          // 是NaN的时候 true 、否则 就是false 
+          //  输入是否为数字
+          text.innerHTML='请输入数字';
+        }else if(val.length<5 || val.length>10 ){
+          // 5-10位
+          text.innerHTML='请输入5-10位数字';
+        }else if(val[0]=='0'){
+          // 首字母不能是0
+          text.innerHTML='首字母不能为0';
+        }else if(val != String(parseInt(val))){
+          // 输入框的值 是字符串 
+          // 输入的值： '123.12' -> parseInt('123.12') -> 123
+          // '123.12' != 123  true;
+          // 123.12  != 123 true;
+          // '123.00' != 123 ->  123 != 123 false
+          // != 比较运算符 隐式转化
+          // 解决方案： 左右都是字符串！ 它就不会转数据类型了！
+          // '123.00' != '123' true 
+          text.innerHTML='请不要输入小数';
+
+        }else if(val < 0){
+          text.innerHTML='请不要输入负值';
+        }else{
+          text.innerHTML='验证通过';
+        }
+      }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <my-element attr1="a"></my-element>
+
+    <hr />
+    <button>按钮</button>
+
+    <hr />
+
+    <iframe src="3.html" frameborder="0"></iframe>
+    
+    <script>
+    
+        class MyElement extends HTMLElement {
+
+            constructor() {
+                super();
+
+                let shadow = this.attachShadow({mode: 'open'});
+
+                shadow.innerHTML = '自定义元素';
+            }
+
+            static get observedAttributes() {
+                return ['attr1', 'attr2'];
+            }
+
+            connectedCallback() {
+                console.log('connectedCallback');
+            }
+
+            disconnectedCallback() {
+                console.log('disconnectedCallback');
+            }
+
+            adoptedCallback() {
+                console.log('adoptedCallback');
+            }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log(name, oldValue, newValue);
+            }
+
+        }
+
+        customElements.define('my-element', MyElement);
+
+        let myElement = document.querySelector('my-element');
+        let button = document.querySelector('button');
+        let iframe = document.querySelector('iframe');
+        // console.log(myElement);
+
+        
+        button.onclick = function() {
+            // myElement.remove();
+
+            //iframe.contentWindow.document.body.innerHTML = 'kaikeba';
+
+            // iframe.contentWindow.document.body.appendChild(myElement);
+
+
+            // myElement.setAttribute('attr1', 'kaikeba');
+            // myElement.removeAttribute('attr1');
+
+            myElement.setAttribute('attr3', 'kaikeba');
+        }
+    </script>
+
+</body>
+</html>

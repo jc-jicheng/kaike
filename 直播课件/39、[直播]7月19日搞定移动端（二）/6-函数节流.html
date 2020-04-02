@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #list li {
+            list-style: none;
+            font: 14px/40px "宋体";
+            border-bottom: 1px solid #000;
+        }
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height:  100px;
+            background: red;
+            transition: .5s;
+        }
+    </style>
+</head>
+<body>
+<!--
+     函数节流[throttle]   
+        让函数保持在一个可接受的固定频率执行
+-->  
+<div id="box"></div>  
+<ul id="list">
+
+</ul>
+<script>
+{
+    let list = document.querySelector("#list");
+    list.innerHTML = [...(".".repeat(100))].map((item,index)=>{
+        return `<li>函数防抖_${index}</li>`;
+    }).join("");
+}
+{
+    let box = document.querySelector("#box");
+    let timer = 0;
+    //let nub = 0;
+    //console.time(nub);
+    window.addEventListener("scroll",function(){
+        //console.time(nub);
+        if(timer){
+            return ;
+        }
+        console.log(1);
+        timer = setTimeout(()=>{
+            timer = 0;
+        },500);
+    });
+    // 节流函数
+    function throttle(){
+
+    }
+}   
+</script>
+</body>
+</html>

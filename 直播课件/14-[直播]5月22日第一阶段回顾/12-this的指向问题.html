@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    this 的指向问题：
+        函数的调用：this 指向 window
+        对象的方法：
+            this 指向 对象 (事件函数，this 指向 调用事件的元素)
+                1. 元素的事件中 this，指向元素
+                2. 对象方法的 this 指向 对象
+*/
+function fn(){
+    console.log(this);
+}
+//fn();
+var obj = {
+    a:1,
+    fn: fn
+};
+// 给事件绑定了一个处理函数，当我们触发元素事件时，如查看该元素上有没有对应的事件处理函数，没有就调用
+document.onclick = function(){
+    console.log(this);
+};
+// setInterval(function(){
+//     document.onclick();
+// },200);
+
+</script>    
+</body>
+</html>

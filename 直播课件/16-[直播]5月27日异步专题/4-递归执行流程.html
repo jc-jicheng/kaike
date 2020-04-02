@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 正常情况下，函数调用，或者里边的所有代码都执行完才会执行下一步
+function fn(nub){
+    console.log(nub);
+    if(nub < 3){
+        fn(nub+1);
+    }
+}
+fn(0);
+/*
+function fn(0){
+    console.log(0);
+    if(nub < 3){
+        function fn(1){
+            console.log(1);
+            if(nub < 3){
+                function fn(2){
+                    console.log(2);
+                    if(2 < 3){
+                        function fn(3){
+                            console.log(3);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+</script>    
+</body>
+</html>

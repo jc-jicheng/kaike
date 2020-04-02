@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://cdn.bootcss.com/redux/4.0.4/redux.min.js"></script>
+    <script>
+    
+        let datas = [
+            {id: 1, username: 'BaoGe'},
+            {id: 2, username: 'MM'}
+        ];
+        function todo(state = [], action) {
+            switch(action.type) {
+                case 'ADD':
+                    return [...state, action.payload];
+                    break;
+                case 'REMOVE':
+                    return state.filter(v=>v.id!==action.payload.id);
+                    break;
+                default:
+                    return state;
+            }
+        }
+        let store = Redux.createStore( todo, datas );
+        console.log(store);
+        console.log( store.getState() );
+
+        let unsubscribe = store.subscribe(function() {
+            // console.log('...');
+            console.log(store.getState());
+        });
+        // unsubscribe();
+
+        let dispatch = store.dispatch;
+        store.dispatch = function dis(action) {
+            console.log('开始');
+            dispatch(action);
+            console.log('结束');
+        }
+
+        store.dispatch({
+            type: 'ADD',
+            payload: {
+                id: 3,
+                username: 'DaHai'
+            }
+        });
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            /* 
+                transition 过渡
+                    all(默认值)  过渡样式：全部样式
+                    ease(默认值) 过渡形式：缓冲运动
+                        (linear)  匀速
+                        (ease-in) 加速
+                        (ease-out)减速
+                        (ease-in-out)先加速后减速
+                    1s(必选)   过渡时间：1秒
+             */
+
+            transition:1s;
+        }
+        div:hover{
+            height: 500px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

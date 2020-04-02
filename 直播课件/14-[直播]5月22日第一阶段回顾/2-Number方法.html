@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// var str = "1a1";
+// console.log(Number(str));
+var obj = {
+    a: 1,
+    b: 2
+};
+var arr = []; 
+console.log(Number(arr));
+
+function fn(){
+
+}
+console.dir(fn);
+/*
+     1. 字符串类型，使用 Number() 转换时，规则如下：
+        1. 当整段字符串都复合数字规则时，转换为数字返回
+        2. 空字符串,直接返回 0
+        3. 其余情况，直接返回 NaN
+    2. 布尔值类型，使用 Number() 转换时，true 返回 1，false 返回 0
+    3. null，使用 Number() 转换时 返回 0
+    4. undefined，使用 Number() 转换时 返回 NaN
+    5. 对象类型，使用 Number() 转换时，然后调用的对象的toString()方法，然后再次依照前面字符串的转换规则进行转换
+
+*/
+</script>    
+</body>
+</html>

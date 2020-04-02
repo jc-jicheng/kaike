@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // requestAnimationFrame
+
+        var div=document.querySelector('div');
+        var l=0;
+        var timer=null;
+        div.onclick=function(){
+            timer=setInterval(function(){
+                l+=5;
+                div.style.left=l+'px';
+
+                // 停止条件
+                if(l==300){
+                    clearInterval(timer);
+                }
+
+            },30);
+        }
+
+
+    </script>
+</body>
+</html>

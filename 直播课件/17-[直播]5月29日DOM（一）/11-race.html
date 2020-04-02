@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(1);
+        reject();
+    },100);
+})
+let p2 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(2);
+        resolve();
+    },300);
+})
+let p3 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(3);
+        reject();
+    },200);
+})
+
+// p p2 p3 状态都为 resolve 之后，再去做一些事情
+
+let p4 = Promise.race([p,p2,p3]);
+p4.then(()=>{
+    console.log("成功");
+},()=>{
+    console.log("失败");
+});
+
+/*
+ Promise.race([p,p2,p3]) 当传入的 promise 有一个返回了完成状态，他就返回 完成状态，具体 是 resolve 还是 reject 就需要根据最早完成 promise 来决定
+ 参数：
+    [Promise,Promise,Promise]
+*/
+</script>    
+</body>
+</html>

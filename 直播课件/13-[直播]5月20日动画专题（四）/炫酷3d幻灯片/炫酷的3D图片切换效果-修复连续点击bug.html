@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/mTween.js"></script>
+    <style>
+        body{
+            background: url(img/bg.jpg);
+            overflow: hidden;
+        }
+
+        .view{
+            width: 1000px;
+            height: 600px;
+            perspective: 600px;
+            margin: 100px auto;
+        }
+
+        .bigbox{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .box{
+            width: 200px; 
+            height: 200px;
+            /* 将元素内-开启3d渲染模式 */
+            transform-style: preserve-3d;
+            position:absolute;
+        }
+        .box span{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #DDD;
+            opacity: 0;
+            transition: 1.5s;
+        }
+        
+        .show span{
+            opacity: 1;
+        }
+
+        .box span:nth-child(1){
+            transform: translateZ(100px);
+        }
+        .box span:nth-child(2){
+            transform:rotateY(90deg) translateZ(100px);
+        }
+        .box span:nth-child(3){
+            transform:rotateY(180deg) translateZ(100px);
+        }
+        .box span:nth-child(4){
+            transform:rotateY(270deg) translateZ(100px);
+        }
+        .box span:nth-child(5){
+            transform:rotateX(90deg) translateZ(100px);
+        }
+        .box span:nth-child(6){
+            transform:rotateX(-90deg) translateZ(100px);
+        }
+
+        .box[data-z="0"] span:nth-child(1){
+            background-image: url(img/bg1.png);
+        }
+        .box[data-z="1"] span:nth-child(1){
+            background-image: url(img/bg2.png);
+        }
+
+        .box[data-z="2"] span:nth-child(1){
+            background-image: url(img/1.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .box[data-z="2"] span:nth-child(2){
+            background-image: url(img/2.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .box[data-z="2"] span:nth-child(3){
+            background-image: url(img/3.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .box[data-z="2"] span:nth-child(4){
+            background-image: url(img/4.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .btnbox{ 
+            width: 400px;
+            margin: 50px auto;
+            opacity: 0;
+            transition: 1s;
+        }
+        .btnbox button{
+            width: 100px;
+            height:100px;
+            background: url(img/btn.png);
+            background-size: 100%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .btnbox button:nth-child(1){
+            transform: rotate(180deg);
+        }
+        .btnbox button:nth-child(2){
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="view">
+        <div class="bigbox">
+             
+        </div>
+        <div class="btnbox">
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+    <script>
+        //获取bigbox节点
+        let bigbox=document.querySelector('.bigbox');
+        //3层 3行 5列 的立方体矩阵  = 45个  // boxw 盒子宽度 boxh盒子高度
+        let zSize=3,rows=3,ceils=5,boxw=200,boxh=200;
+
+        //创建文档碎片
+        let fragment=document.createDocumentFragment();
+        for(let z=0;z<zSize;z++){
+            for(let y=0; y<rows;y++){
+                for(let x=0;x<ceils;x++){
+                    //创建 立方体
+                    let box=document.createElement('div');
+                    //后期需要用到立方体自己的位置
+                    box.dataset.x=x; //列数
+                    box.dataset.y=y; //行数
+                    box.dataset.z=z; //层数
+                    
+                    //添加class
+                    box.classList.add('box');
+                    //添加html文档
+                    box.innerHTML=`
+                        <span style="background-position:-${boxw*x}px -${boxh*y}px"></span>
+                        <span style="background-position:-${boxw*x}px -${boxh*y}px"></span>
+                        <span style="background-position:-${boxw*x}px -${boxh*y}px"></span>
+                        <span style="background-position:-${boxw*x}px -${boxh*y}px"></span>
+                        <span></span>
+                        <span></span>
+                    `;
+                    box.style.cssText=`
+                        top:${boxh*y}px;
+                        left:${boxw*x}px;
+                    `
+
+                    // 在 mTween.js 中 有css方法
+                    // 1. 设置样式 css(el,'rotateY',90);
+                    // 2. 获取样式 css(el,'rotateY')
+                    css(box,'translateX',(x-Math.floor(ceils/2))*200*(z+1));
+                    css(box,'translateY',(y-Math.floor(rows/2))*200*(z+1));
+                    css(box,'translateZ',(z+1)*200);
+                    //设置初始值
+                    css(box,'rotateY',0);
+
+                    //存入到文档碎片中
+                    fragment.appendChild(box);
+                }
+            }
+        }
+        //插入到dom节点中
+        bigbox.appendChild(fragment);
+
+         //入场动画
+        let boxs=document.querySelectorAll('.box');
+        
+        let times=3000;
+        boxs.forEach(item=>{
+            let z=item.dataset.z;
+            let dely=Math.random()*500+z*700;
+
+            setTimeout(()=>{
+                //通过控制class 来使元素有透明度的过渡效果
+                item.classList.add('show');
+
+                // el  设置运动元素
+                //attrs 设置运动样式
+                //duration 设置运动时间
+                mTween({
+                    //运动元素
+                    el:item,
+                    //运动样式
+                    attrs:{
+                        translateX:0,
+                        translateY:0,
+                        translateZ:-100,
+                    },
+                    duration:times-dely
+                });
+            },dely);
+            
+        });
+
+        //入场动画完毕时的操作
+        setTimeout(()=>{
+            //把前2层盒子 删掉
+            boxs.forEach(item=>{
+                if(item.dataset.z<2){
+                    item.remove();
+                }
+            })
+
+            let btnbox=document.querySelector('.btnbox');
+
+            btnbox.style.opacity=1;
+
+        },times);
+
+        //获取事件元素
+        let btns=document.querySelectorAll('.btnbox button');
+        //设置开关
+        let isPlay=false;
+        //存储运动形式
+        let fnArr=[];
+        let now=0;
+
+        btns[0].onclick=function(){
+            //如果isPlay 是 true 阻止点击事件执行
+            if(isPlay)return;
+            isPlay=true;
+            fnArr[now%fnArr.length](90);
+            now++
+        };
+
+        btns[1].onclick=function(){
+            //如果isPlay 是 true 阻止点击事件执行
+            if(isPlay)return;
+            isPlay=true;
+            fnArr[now%fnArr.length](-90);
+            now++;
+        };
+
+        fnArr[0]=function(deg){
+            let boxs=document.querySelectorAll('.box');
+
+            let times=1000;
+            boxs.forEach(item=>{
+                let dely=Math.random()*400;
+                setTimeout(()=>{
+                    //运动框架
+                    mTween({
+                        el:item,
+                        attrs:{
+                            rotateY:css(item,'rotateY')+deg
+                        },
+                        duration:times-dely
+                    });
+                },dely);
+            });
+
+            //将开关设置为false
+            setTimeout(()=>{
+                isPlay=false;
+            },times);
+        }
+
+        //分三个运动阶段
+        //1. 向前平移
+        //2. 旋转
+        //3. 向后平移
+        fnArr[1]=function(deg){
+            let boxs=document.querySelectorAll('.box');
+            let tiems=2300;
+            boxs.forEach(item=>{
+               let x=item.dataset.x;
+               let y=item.dataset.y;
+               let dely= x*80+y*80;
+                
+               setTimeout(() => {
+                 mTween({
+                     el:item,
+                     attrs:{
+                         translateZ:css(item,'translateZ')+100
+                     },
+                     duration:600,
+                     //当前运动完毕时执行
+                     cb:()=>{
+                        mTween({
+                            el:item,
+                            attrs:{
+                                rotateY:css(item,'rotateY')+deg
+                            },
+                            duration:600,
+                            //当前运动完毕时执行
+                            cb:()=>{
+                                mTween({
+                                    el:item,
+                                    attrs:{
+                                        translateZ:css(item,'translateZ')-100
+                                    },
+                                    duration:600,
+                                });
+                            }
+                        });
+                     }
+                 });
+               }, dely);
+
+            });
+
+            //将开关设置为false
+            setTimeout(()=>{
+                isPlay=false;
+            },times);
+        }
+
+
+        fnArr[2]=function(deg){
+            let boxs=document.querySelectorAll('.box');
+            let times=2200;
+            boxs.forEach(item=>{
+               let x=parseInt(item.dataset.x);
+               let y=parseInt(item.dataset.y);
+
+               console.log(x,y);
+               let dely=Math.random()*400;
+
+               //判断方向
+               let dir=1; // 1 -1
+
+               if(x%2){
+                 dir=y%2?-1:1;
+               }else{
+                 dir=y%2?1:-1;
+               }
+
+                
+               setTimeout(() => {
+                 mTween({
+                     el:item,
+                     attrs:{
+                         translateZ:css(item,'translateZ')+50*dir
+                     },
+                     duration:600,
+                     //当前运动完毕时执行
+                     cb:()=>{
+                        mTween({
+                            el:item,
+                            attrs:{
+                                rotateY:css(item,'rotateY')+deg
+                            },
+                            duration:600,
+                            //当前运动完毕时执行
+                            cb:()=>{
+                                mTween({
+                                    el:item,
+                                    attrs:{
+                                        translateZ:css(item,'translateZ')-50*dir
+                                    },
+                                    duration:600,
+                                });
+                            }
+                        });
+                     }
+                 });
+               }, dely);
+
+            });
+
+            //将开关设置为false
+            setTimeout(()=>{
+                isPlay=false;
+            },times);
+        }
+
+        
+
+
+    </script>
+</body>
+</html>

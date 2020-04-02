@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(1);
+            resolve();
+            // reject({
+            //     index: 1,
+            //     error: "出错了"
+            // });
+        },1000);
+}).then((info)=>{
+    return Promise.reject("错误");
+}).then((info)=>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(3);
+            resolve();
+        },1000)
+    });
+}).then((info)=>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(4);
+            resolve();
+        },1000)
+    });
+}).catch((err)=>{
+        console.log(err);
+})
+
+// catch 捕获 之前的 Promise 中错误
+</script>    
+</body>
+</html>

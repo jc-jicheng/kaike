@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .kkb-radio {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #000000;
+            background-color: #ffffff;
+        }
+        .kkb-radio.checked {
+            border-color: green;
+        }
+        .kkb-radio.disabled {
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <p>val1: {{val1}}</p>
+        <p>val2: {{val2}}</p>
+        <hr>
+
+        <kkb-radio :checked.sync="val1" :disabled.sync="val2"></kkb-radio>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        const kkbRadio = {
+            props: ['checked', 'disabled'],
+            data() {
+                return {
+                    status: this.checked,
+                    dis: this.disabled
+                }
+            },
+            template: `
+                <div class="kkb-radio" :class="{'checked': status, 'disabled': dis}" @click="changeDis" @mouseover="setChecked" @mouseout="removeChecked"></div>
+            `,
+            methods: {
+                setChecked() {
+                    this.status = true;
+                    this.$emit('update:checked', this.status);
+                },
+                removeChecked() {
+                    this.status = false;
+                    this.$emit('update:checked', this.status);
+                },
+                changeDis() {
+                    this.dis = !this.dis;
+                    this.$emit('update:disabled', this.dis);
+                }
+            }
+        };
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                val1: false,
+                val2: false
+            },
+            components: {
+                'kkb-radio': kkbRadio
+            },
+            methods: {
+                
+            }
+        });
+    </script>
+</body>
+</html>

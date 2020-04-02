@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="./js/MyPromise.js"></script>
+    <script>
+    
+        let p1 = new MyPromise( (resolve, reject) => {
+            setTimeout(_=>{
+                console.log('1');
+                resolve('开课吧');
+            }, 1000);
+        } );
+
+        // then方法 与 传给 then 的方法 是不一样的
+        p1.then( val => {
+            console.log('val-1', val);
+            // return 'kaikeba';
+            return new MyPromise( resolve => {
+                setTimeout(_=>{
+                    resolve('kaikeba');
+                }, 1000);
+            } );
+        } ).then( val => {
+            console.log('val-2', val);
+        } );
+
+    </script>
+</body>
+</html>

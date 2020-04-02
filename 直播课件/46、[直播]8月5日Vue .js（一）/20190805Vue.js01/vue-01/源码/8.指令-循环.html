@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <ul>
+            <li :key="index" v-for="(item, index) in users">
+                {{index}} - {{item.username}}
+            </li>
+        </ul>
+        <dl>
+            <dt>宝哥哥</dt>
+            <dt v-for="(val, key, index) of user">
+                {{val}} - {{key}} - {{index}}
+            </dt>
+        </dl>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                users: [
+                    {id: 1, username: 'baogege'},
+                    {id: 2, username: 'mt'},
+                    {id: 3, username: 'haigege'}
+                ],
+                user: {
+                    id: 1,
+                    username: 'baogege',
+                    gender: '男'
+                }
+            }
+        });
+
+        // let user = {
+        //     id: 1,
+        //     username: 'baogege',
+        //     gender: '男'
+        // }
+
+        // keys = Object.keys(user);
+
+        // keys.forEach( (val, index) => {
+        //     console.log(user[val], val, index);
+        // } );
+
+    </script>
+</body>
+</html>

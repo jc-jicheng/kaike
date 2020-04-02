@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .js_animation_box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="animate">vue动画</button>
+        <div ref="div" class="js_animation_box"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+    <script>
+
+        let MyPlugin = {
+            install(_V, options) {
+                // console.log('install');
+
+                _V.prototype.kaikeba = '开课吧';
+
+                _V.mixin({
+                    created: function () {
+                        console.log('插件的created');
+                    }
+                });
+            }
+        }
+
+        function http(_Vue, options) {
+            _Vue.prototype.$http = axios.create(options);
+        }
+
+        Vue.use(http, {baseURL: 'https://api.apiopen.top'});
+
+        Vue.use( MyPlugin );
+       
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                
+            },
+            methods: {
+                animate() {
+                    console.log(this.kaikeba);
+                    // this.$(this.$refs.div).animate({width: 200})
+                }
+            },
+            created: async function () {
+                // console.log('组件的created');
+                console.log(this.$http);
+                let rs = await this.$http({
+                    method: 'post',
+                    url: '/musicRankings'
+                });
+                console.log(rs);
+            }
+        });
+
+        console.log( app.kaikeba );
+    </script>
+</body>
+</html>

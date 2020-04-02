@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:100;
+            height:100px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+    // 传值
+    // 传址
+
+    // 简单数据类型 数字
+    // 传值操作  （复制）
+    var a=12;
+    var b=a;
+    a=5;
+    console.log(b);
+
+    // 复杂数据类型 
+    // 传址操作 （引用）  始终是同一个对象 ， 只不过多了一个变量名
+    // 传的就是 堆内的存储地址
+    var c=[1,2,3];
+    var d=c;
+    d[3]=4;
+    console.log(d);
+    // [1,2,3]   1
+    // [1,2,3,4] 2
+
+    </script>
+</body>
+</html>

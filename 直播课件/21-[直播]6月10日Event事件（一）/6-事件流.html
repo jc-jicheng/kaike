@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #box {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            #box2 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: green;
+            }
+            #box3 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+            p {
+                margin: 0;
+            }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<div id="div4">
+    <p>p标签</p>
+</div>
+<script>
+{
+    let box = document.querySelector("#box");
+    let box2 = document.querySelector("#box2");
+    let box3 = document.querySelector("#box3");
+    
+    window.addEventListener("click",function(){
+        console.log(window,"捕获");
+    },true); 
+    box.addEventListener("click",function(){
+        console.log(1,"捕获");
+    },true);
+    box2.addEventListener("click",function(){
+        console.log(2,"捕获");
+    },true);
+    box3.addEventListener("click",function(){
+        console.log(3,"捕获");
+    },true);
+    window.addEventListener("click",function(){
+        console.log(window,"冒泡");
+    })
+    box.addEventListener("click",function(){
+        console.log(1,"冒泡");
+    });
+    box2.addEventListener("click",function(){
+        console.log(2,"冒泡");
+    });
+    box3.addEventListener("click",function(){
+        console.log(3,"冒泡");
+    });
+    // 事件流：事件执行的一个完整过程
+    /*
+     事件流：
+        当事件发生时，最先得到通知的是window，然后是document，由上至下逐级依次而入，直到真正触发事件的那个元素(目标元素)为止，这个过程就是事件捕获。接下来，事件会从目标元素开始起由下至上逐级依次传播，直到window对象为止，这个过程就是冒泡。
+        事件流: 捕获 -> target(事件源) -> 冒泡
+    */
+}
+</script>    
+</body>
+</html>

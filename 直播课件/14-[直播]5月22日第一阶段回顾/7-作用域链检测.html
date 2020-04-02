@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// for(var i = 0; i < 5; i++){
+//     fn(i);
+// }
+// function fn(i){
+//     setTimeout(function(){
+//         console.log(i);
+//     },100);
+// }
+
+// function fn1(i){
+    
+//     setTimeout(function(){
+//         console.log(i);
+//     },100);
+// }
+// fn1(0); 
+
+// function fn2(i){
+//     setTimeout(function(){
+//         console.log(i);
+//     },100);
+// } 
+// fn2(1);
+// function fn3(i){
+//     setTimeout(function(){
+//         console.log(i);
+//     },100);
+// } 
+// fn3(2);
+// function fn4(i){
+//     setTimeout(function(){
+//         console.log(i);
+//     },100);
+// } 
+// fn4(3);
+// function fn5(i){
+//     setTimeout(function(){
+//         console.log(i);
+//     },100);
+// }   
+// fn5(4)
+/*
+    1. 同一个函数每次执行没有任何关联,相当于创建多个函数
+*/
+function fn1(){
+    var i = 0;
+    setTimeout(function(){
+        console.log(i);
+    },100);
+}
+fn1(); 
+
+function fn2(){
+    var i = 1;
+    setTimeout(function(){
+        console.log(i);
+    },100);
+} 
+fn2();
+function fn3(i){
+    var i = 2;
+    setTimeout(function(){
+        console.log(i);
+    },100);
+} 
+fn3(2);
+function fn4(i){
+    var i = 3;
+    setTimeout(function(){
+        console.log(i);
+    },100);
+} 
+fn4(3);
+function fn5(i){
+    var i = 4;
+    setTimeout(function(){
+        console.log(i);
+    },100);
+}   
+fn5(4)
+
+</script>    
+</body>
+</html>

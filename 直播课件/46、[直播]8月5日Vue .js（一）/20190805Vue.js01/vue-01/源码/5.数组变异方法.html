@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        
+    </div>
+    
+    <script>
+    
+        let arr = [1,2,3];
+
+        // Object.defineProperty(arr, '2');
+
+        let push = Array.prototype.push;
+        Array.prototype.push = function(...args) {  //剩余参数
+            console.log('变异的push');
+            console.log(args, arguments);
+            push.call(this, ...args);
+        }
+
+        arr.push(4);
+
+        // let obj = {
+        //     fn() {
+        //         console.log(this);
+        //     }
+        // }
+
+        // obj.fn();
+
+        // let f = obj.fn;
+        // f();
+
+
+    </script>
+</body>
+</html>

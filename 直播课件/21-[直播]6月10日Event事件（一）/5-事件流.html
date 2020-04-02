@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #box {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            #box2 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: green;
+            }
+            #box3 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<script>
+{
+    let box = document.querySelector("#box");
+    let box2 = document.querySelector("#box2");
+    let box3 = document.querySelector("#box3");
+    window.addEventListener("click",function(){
+        console.log(window);
+    },true)
+    box.addEventListener("click",function(){
+        console.log(1);
+    },true);
+    box2.addEventListener("click",function(){
+        console.log(2);
+    },true);
+    box3.addEventListener("click",function(){
+        console.log(3);
+    },true);
+    //addEventListener 第三个参数：useCapture true 捕获|| false 冒泡 是否在捕获阶段执行，默认为 false（在冒泡阶段执行）
+
+    // 事件捕获：当我们触发一个事件的时候，window 会最先收到消息，会逐级下捕获事件具体发生在哪个元素上，在捕获的过程中，如果元素有对象事件，就会执行
+}
+</script>    
+</body>
+</html>

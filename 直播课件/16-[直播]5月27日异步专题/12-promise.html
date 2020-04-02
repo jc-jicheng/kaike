@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// Promise，在构建时，会接受接收一个参数，参数的类型是个函数，可以在这个函数中书写的异步操作 
+// 这个函数会在 Promise 构造时 立即执行了
+// Promise 中有 三个不同的状态，它本身通过这个状态来判点我们异步执行的结果
+
+/*
+ [[PromiseStatus]]
+    pending: 异步操作正在执行中
+    Fulfilled(标准)||Resolved 执行成功
+    Rejected 执行失败
+*/
+//  promise 中的状态，由我们定义改变, 默认是 pending ，当调用了 Resolve 函数后，状态就会变成Resolved， 当调用 Reject 函数，状态就会变成 Rejected
+let p = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(1);
+        resolve();
+    },1000);
+});
+</script>    
+</body>
+</html>

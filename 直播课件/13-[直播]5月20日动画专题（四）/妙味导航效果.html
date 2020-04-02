@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+            display: block;
+            height: 36px;
+            line-height: 36px;
+            border: 1px solid red;
+            padding: 0 10px;
+        }
+
+        nav{
+            width: 600px;
+            margin: 100px auto;
+        }
+
+        ul{
+            perspective: 600px;
+        }
+
+        li{
+            transform-style: preserve-3d;
+            float: left;
+            transition: 1s;
+            height: 36px;
+            transform-origin: center center -18px;
+        }
+
+        .show{
+            color: red;
+            transform: rotateX(-90deg);
+            transform-origin: top center;
+        }
+
+        li:hover{
+            transform: rotateX(90deg);
+        }
+
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <ul>
+            <li>
+                <a href="#">导航</a>
+                <a href="#" class="show">导航</a>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        // 1. 鼠标移入 改变 元素中的文字位置
+        // 2. 鼠标移入 获取到元素位置  并且改变 横条的位置    
+    </script>
+</body>
+</html>

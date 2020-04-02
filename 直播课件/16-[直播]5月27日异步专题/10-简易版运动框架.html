@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+{
+    // left  200
+    let box = document.querySelector("#box");
+    box.onclick = function(){
+        startMove(this,"left",200,(info)=>{
+            console.log("动画执行完了",info);
+        });
+        // startMove(this,"top",200);
+    }
+    // el、attr、target、cb（callback 回调函数）
+    function startMove(el,attr,target,cb){
+        let now = parseFloat(getComputedStyle(el)[attr]);
+        let dir = (target - now)/Math.abs(target - now); //正值 从大到小，负值从小到大
+        let speed = dir * 5;
+        requestAnimationFrame(move);
+        function move(){
+            let now = parseFloat(getComputedStyle(el)[attr]);
+            if(now == target){
+                // console.log("动画执行完了");
+                cb&&cb("呵呵");
+            } else {
+                now += speed;
+                el.style[attr] = now + "px";
+                requestAnimationFrame(move); 
+            }
+        }
+    }
+}
+</script>    
+</body>
+</html>

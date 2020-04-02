@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 10vw;
+        }
+        body {
+            margin: 0;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #wrap {
+            position: relative;
+            width: 100vw;
+            overflow: hidden;
+        }
+        #list {
+            float: left;
+            display: flex;
+            display: -webkit-box;
+        }
+        #list li {
+            flex: none;
+            width: 100vw;
+        }
+        #list img {
+            width: 100%;
+            display: block;
+        }
+        .nav {
+            position: absolute;
+            left: 0;
+            bottom: .2rem;
+            width: 100%;
+            text-align: center;
+            vertical-align: top;
+        }
+        .nav a {
+            display: inline-block;
+            width: .3rem;
+            height: .3rem;
+            background: #fff;
+            margin: 0 .1rem;
+            border-radius: .15rem;
+            transition: .3s;
+        }
+        .nav .active {
+            width: .6rem;  
+            color: #fff;  
+        }
+    </style>
+</head>
+<body>  
+<div id="wrap">
+    <ul id="list">
+        <li><img src="img/banner01.png" /></li>
+        <li><img src="img/banner02.png" /></li>
+        <li><img src="img/banner03.png" /></li>
+        <li><img src="img/banner04.png" /></li>
+    </ul>
+    <nav class="nav">
+        <a class="active"></a><a></a><a></a><a></a>
+    </nav>
+</div>  
+<script src="../mTween.js"></script>
+<script>
+{
+	let wrap = document.querySelector("#wrap");
+    let list = document.querySelector("#list");
+    let navs = document.querySelectorAll(".nav a");
+    css(list,"translateX",0);
+    let startPoint = {};
+    let startTranlateX = 0;
+    let scale = .3;//当我们拖动超过图片尺寸多少时会走到下一张
+    let now = 0;
+    wrap.addEventListener("touchstart",(e)=>{
+        let touch = e.changedTouches[0];
+        startPoint.x = touch.pageX;
+        startPoint.y = touch.pageY;
+        startTranlateX = css(list,"translateX");
+    });
+    wrap.addEventListener("touchmove",(e)=>{
+        let touch = e.changedTouches[0];
+        let nowPoint = {
+            x: touch.pageX,
+            y: touch.pageY
+        };
+        let disPoint = {
+            x: nowPoint.x - startPoint.x,
+            y: nowPoint.y - startPoint.y
+        };
+        css(list,"translateX",startTranlateX + disPoint.x);
+    });
+    wrap.addEventListener("touchend",(e)=>{
+        let disPointX = e.changedTouches[0].pageX - startPoint.x;
+        if(Math.abs(disPointX) > wrap.clientWidth*scale){
+            //console.log("要切换到下一张",disPointX);
+            // disPointX 正数 切换到上一张 -1 ，负值: 切换到下一张 +1 
+            //console.log(disPointX/Math.abs(disPointX));
+            now -= disPointX/Math.abs(disPointX);
+        }
+        // css(list,"translateX",-now*wrap.clientWidth);
+        mTween({
+            el: list,
+            attr: {
+                translateX:-now*wrap.clientWidth
+            }
+        });
+    });
+}
+</script>
+</body>
+</html>

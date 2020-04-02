@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // requestAnimationFrame(fn)
+        // 渲染时机和计算机显示器渲染时机一致（性能好）
+        // 定时器时间不精准
+        // 不需要传递间隔时间
+        // 相当于setTimeout 一次性的
+        // 如果想连续执行 - 
+        // 速度：速度是有计算机显示器的渲染速度决定的！
+        // 1000/60 = 16.666... 
+        // 兼容性：不兼容IE9及以下
+
+        var div=document.querySelector('div');
+        var l=0;
+        var timer=null;
+
+        function run(){
+            l+=5;
+            div.style.left=l+'px';
+            // 设置停止条件
+            if(l==300){
+                cancelAnimationFrame(timer);
+            }else{
+                timer=requestAnimationFrame(run);
+            }
+        }
+
+        div.onclick=function(){
+            // 相当于定时器
+            timer=requestAnimationFrame(run);
+        }
+
+
+    </script>
+</body>
+</html>

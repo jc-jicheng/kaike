@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button"  value="停">
+    <script>
+        var btn=document.querySelector('input');
+        var timer=null;
+
+        // 如何停止
+        btn.onclick=function(){
+            // 清除定时器
+            clearTimeout(timer);
+        }
+
+        //想要停止定时器 必先保存定时器（序号）
+        // 定时器 返回的值 是一个 当前页面中 开启的第几个定时的（序号）
+        timer=setTimeout(function(){
+            alert('开课吧');
+        },2000);
+
+        console.log(timer)
+    </script>
+</body>
+</html>

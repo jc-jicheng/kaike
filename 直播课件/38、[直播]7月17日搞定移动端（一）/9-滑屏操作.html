@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        #box {
+           position: absolute;
+           left: 0;
+           top: 0;
+           width: 100%;
+           height: 100%;
+           overflow: hidden;
+        }
+        #list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #list li {
+            font: 14px/40px "宋体";
+            padding-left: 20px;
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="list"></ul>
+</div>
+<script src="mTween.js"></script>
+<script>
+// 列表结果生成    
+{
+    let list = document.querySelector("#list");
+    list.innerHTML = [...(".".repeat(200))].map((item,index)=>{
+        return `<li>这是第${index}个li</li>`;
+    }).join("");
+}
+// 滑屏操作
+{
+    let list = document.querySelector("#list");
+    let startEl = 0;
+    let startPoint = 0;
+    css(list,"translateY",0);
+    css(list,"translateZ",0);
+    list.addEventListener("touchstart",(e)=>{
+        startPoint = e.changedTouches[0].pageY;
+        startEl = css(list,"translateY");
+    });
+    list.addEventListener("touchmove",(e)=>{
+        var nowPoint = e.changedTouches[0].pageY;
+        var dis = nowPoint - startPoint;
+        css(list,"translateY",startEl + dis);
+    });
+}
+</script>
+</body>
+</html>

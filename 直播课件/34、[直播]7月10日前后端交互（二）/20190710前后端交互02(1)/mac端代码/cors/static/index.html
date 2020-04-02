@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn1">点击获取ajax跨域请求</button>
+    <button class="btn2">点击请求同源ajax</button>
+    <button class="btn3">点击请求3000设置cookie</button>
+    <button class="btn4">点击发送预检请求</button>
+</body>
+<!-- <script src="http://10.211.55.3:3000/getData3000"></script> -->
+<script>
+    // console.log(a)
+    let btn1 = document.querySelector(".btn1");
+    let btn2 = document.querySelector(".btn2");
+    let btn3 = document.querySelector(".btn3");
+    let btn4 = document.querySelector(".btn4");
+    btn1.onclick = function(){
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true; //客户端允许携带凭证；
+        xhr.open("get","http://10.211.55.3:3000/getData3000",true);
+        xhr.onload = function(){
+            // console.log(xhr.getResponseHeader("content-type"));
+            console.log(xhr.getAllResponseHeaders());
+            console.log(xhr.responseText);
+        }
+        xhr.send();
+    }
+    btn2.onclick = function(){
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","/getData",true);
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+        xhr.send();
+    }
+
+    btn3.onclick = function(){
+        let xhr = new XMLHttpRequest();
+         xhr.withCredentials = true;
+        xhr.open("get","http://10.211.55.3:3000/setCookie3000",true);
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+        xhr.send();
+    }
+
+    btn4.onclick = function(){
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true; //客户端允许携带凭证；
+        // xhr.open("put","http://10.211.55.3:3000/getData3000",true);
+        xhr.open("get","http://10.211.55.3:3000/getData3000",true);
+        xhr.setRequestHeader("content-type","application/json");
+        xhr.onload = function(){
+            // console.log(xhr.getResponseHeader("content-type"));
+            console.log(xhr.getAllResponseHeaders());
+            console.log(xhr.responseText);
+        }
+        xhr.send();
+    }
+
+</script>
+</html>

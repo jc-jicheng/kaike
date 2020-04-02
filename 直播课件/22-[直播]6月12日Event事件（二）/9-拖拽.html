@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<!--
+    比例 换算
+        a/b = scale
+        b*scale = a;
+        a/scale = b
+-->
+<div id="box"></div>   
+<script>
+{
+    let box = document.querySelector("#box");
+    // 拖拽 鼠标按下去之后，才可以拖拽
+    // 鼠标抬起就不能拖拽了
+    box.addEventListener("mousedown",function(){
+        box.addEventListener("mousemove",move);
+        box.addEventListener("mouseup",function(){
+            box.removeEventListener("mousemove",move);
+        },{once: true});
+    });
+    
+    function move(e){
+        box.style.left = e.clientX + "px";
+        box.style.top = e.clientY + "px";
+    }
+    
+}
+</script> 
+</body>
+</html>

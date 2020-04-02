@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="abc"></div>
+    
+    <script>
+        var div=document.querySelectorAll('div')[0];
+
+        // 操作元素属性
+        // div.title='开课吧';
+
+        //自定义属性
+        div.abc='哈哈哈';
+
+        // 自定义属性 f12是看不到的 但是是可以获取到的！
+        console.log(div.abc);
+
+
+
+        
+
+
+    </script>
+</body>
+</html>

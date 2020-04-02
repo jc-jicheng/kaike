@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve,reject)=>{
+    // 写异步的处理
+    setTimeout(()=>{
+        console.log(1);
+        resolve("a");
+    },1000);   
+});
+p.then((info)=>{
+    console.log("resolve",info);
+},()=>{
+    console.log("reject");
+});
+</script>    
+</body>
+</html>

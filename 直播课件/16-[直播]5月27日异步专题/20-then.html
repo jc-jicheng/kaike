@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve,reject)=>{
+    let img = new Image();
+
+    img.src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558976367526&di=121da5a47183105b29fd73a54d9759ac&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Ff%2F5583a4fe547c6.jpg";
+    //img.src = "https://timgsa.baidu.com/c6.jpg";
+    img.onload = function(){
+        resolve("图片请求成功了");
+    };
+    img.onerror = function(){
+        reject("图片请求失败");
+    }
+});
+p.then((data)=>{
+    //console.log("resolve之后要做的事情",data);
+    return new Promise((resolve,reject)=>{
+        resolve("成功");
+    })
+}).then((info)=>{
+    setTimeout(()=>{
+        console.log(11);
+    },1000);
+}).then(()=>{
+    console.log(2222);
+})
+
+/*
+    then 方法本身，会返回一个新的 Promise 对象, 但是状态会有几种情况:
+        1. then 的回调函数中没有返回值，then就会返回一个状态为: resolved 的 promise 对象
+        2. then 的回调函数返回值是 非 promise 的值, then就会返回一个状态为: resolved 的 promise 对象，另外会把返回值，传递给 下一个 then
+        3. then 的回调函数返回值是 promise 对象，then 就直接返回这个  promise 对象，具体的状态可以由我们自己定义,具体传递的值，也由我们自己定义
+*/
+</script>    
+</body>
+</html>

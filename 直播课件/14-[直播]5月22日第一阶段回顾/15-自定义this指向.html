@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+function fn(a,b){
+    console.log(this);
+}
+//fn.call(document,1,2);
+//fn.apply(document,[1,2]);
+
+var fn2 = fn.bind(document);// 返回一个绑定了this的新函数
+fn2();
+
+window.onclick = fn2;
+/*
+    在调用时修改
+        call，apply
+    在声明时绑定
+        bind
+*/
+
+</script>    
+</body>
+</html>

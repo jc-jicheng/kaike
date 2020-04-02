@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1 {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        #box2 {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 100px;
+            height: 100px;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="box1"></div>
+<div id="box2"></div>    
+<script src="mTween.js"></script>
+<script>
+{
+    let box1 = document.querySelector("#box1");
+    let box2 = document.querySelector("#box2");
+    drag(box1);
+    drag(box2);
+    function drag(el){
+        let mouseStart = {};
+        let postionStart = {};
+
+        let move = (e)=>{
+            let mouseNow = {
+                x: e.clientX,
+                y: e.clientY
+            };
+            let dis = {
+                x: mouseNow.x - mouseStart.x,
+                y: mouseNow.y - mouseStart.y
+            };
+            let l = dis.x + postionStart.x;
+            let t = dis.y + postionStart.y;
+            if(isContactRect(box1,box2)){
+                box2.style.background = "green";
+            } else {
+                box2.style.background = "yellow";
+            }
+            css(el,"left",l);
+            css(el,"top",t);
+        }
+        el.addEventListener("mousedown",function(e){
+            mouseStart = {
+                x: e.clientX,
+                y: e.clientY
+            };
+            postionStart = {
+                x: css(el,"left"),
+                y: css(el,"top")
+            }
+            e.preventDefault();
+            document.addEventListener("mousemove",move);
+            document.addEventListener("mouseup",()=>{
+                document.removeEventListener("mousemove",move);
+            },{once:true});
+        });
+    }
+}
+// 检测两个元素，是否重叠(碰撞)
+function isContactRect(el,el2){
+    let elRect = el.getBoundingClientRect();
+    let el2Rect = el2.getBoundingClientRect();
+    if(
+        elRect.right <  el2Rect.left
+        || el2Rect.right <  elRect.left
+        || elRect.bottom <  el2Rect.top
+        || el2Rect.bottom <  elRect.top
+    ){
+        // console.log("没有碰撞");
+        return false;
+    } 
+    return true;
+}
+/*
+    碰撞检测中，一定不会碰撞到的情况,满足一下其中一个或以上的情况
+    1. 元素1的right 小于 元素2的left
+    2. 元素2的right 小于 元素1的left
+    3. 元素1的bottom 小于 元素2的top
+    4. 元素2的bottom 小于 元素1的top
+
+
+*/
+</script>
+</body>
+</html>

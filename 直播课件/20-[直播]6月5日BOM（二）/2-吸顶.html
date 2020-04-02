@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 300px;
+            border: 1px solid #000;
+        }
+        #box {
+            position: absolute;
+            left: 0;
+            top: 300px;
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div id="box"></div>
+<script>
+/*
+    滚动条
+    window.onscroll
+*/
+{
+   let box = document.querySelector("#box");
+   let {top} = getPageOffset(box);
+   let startTop = getComputedStyle(box)["top"];
+   window.onscroll = function(){
+        if(scrollY >= top){
+            box.style.top = 0;
+            box.style.position = "fixed";
+        } else {
+            box.style.top = startTop;
+            box.style.position = "absolute";
+        }
+   };
+}
+function getPageOffset(el){
+    let l = 0;
+    let t = 0;
+    while(el){
+        l += el.offsetLeft;
+        t += el.offsetTop; 
+        el = el.offsetParent;
+    }
+    return {
+        left: l,
+        top: t
+    }
+}
+</script>    
+</body>
+</html>

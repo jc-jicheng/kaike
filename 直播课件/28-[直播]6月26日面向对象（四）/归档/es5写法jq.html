@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>仿写jq</title>
+	</head>
+	<body>
+		<div id="myid" style="background: red; width: 100px;height: 100px;">
+			111
+		</div>
+		<div class="test active">
+			<div class="test1">
+				<div class="test3">
+					我是div一
+				</div>
+				<div class="test3">
+					我是div二
+				</div>
+			</div>
+		</div>
+		<button onclick="sub()">点击我触发</button>
+	</body>
+	<script>
+		//eq、click、on、css、animate
+		
+		function $(arg){
+			return new Jq(arg);
+		}
+		
+		//做兼容函数；
+		function ready(arg){
+			//如果浏览器支持addEventListener就调用，否则用其他方法；
+		if(window.addEventListener){
+			window.addEventListener("DOMContentLoaded",arg,false);
+		}else{
+			//获取头部节点；
+			var head = document.getElementsByTagName("head")[0];
+			var myScript = document.createElement("script");
+			head.appendChild(myScript);
+			//监控script标签是否创建成功，如果创建成功就执行arg函数；
+			myScript.onreadystatechange = function(){
+				if(myScript.readyState=="complete"){
+					//script节点创建完成，执行arg；
+					arg();
+				}
+			 }
+		  }
+		}
+		
+		//根据类名查找节点的函数；
+		function findClass(className,obj){
+			if(obj.getElementsByClassName){
+				//主流浏览器支持getElementsByClassName函数；
+				var eles = obj.getElementsByClassName(className);
+			}else{
+				//IE浏览器不支持；
+				var tags = document.getElementsByTagName("*");
+				
+				var eles = [];
+				
+				for(var i=0;i<tags.length;i++){
+					var reg = new RegExp("\\b"+className+"\\b");
+					if(reg.test(tags[i].className)){
+						eles.push(tags[i]);
+					}
+				}
+				
+			}
+			return eles;
+		}
+		
+		
+		
+		
+		
+		function selectEles(arg){
+			//去掉首位空格；正则；
+			var reg1 = /^\s+|\s+$/g;
+			arg = arg.replace(reg1,"");
+			//将中间的空格替换成一个空格；
+			var reg2 = /\s+/g;
+			arg = arg.replace(reg2," ");
+//			console.log("("+arg+")");
+			var arr = arg.split(" ");
+			console.log(arr);
+			var parents = [document];
+			for(var i=0;i<arr.length;i++){
+				for(var j = 0;j<parents.length;j++){
+//					parents[j]  ===  document
+					//每次查找的内容放在child里面
+					var child = [];
+					//判断字符串以什么作为开头；
+					if(/^\./.test(arr[i])){
+						console.log("以'.'作为开头的");
+						console.log(arr[i]);
+						var className = arr[i].substr(1);
+//						var eles = parents[j].getElementsByClassName(className);
+				//根据类名获取节点的兼容函数；
+				var eles = findClass(className,parents[j]);
+
+//						for(var i=0;i<eles.length;i++){
+//							child.push(eles[i])
+//						}
+						
+						child = eles;
+					}else if(/^#/.test(arr[i])){
+//						console.log("'#'开头的");
+						var idName = arr[i].substr(1);
+						var eles =  document.getElementById(idName);
+						child.push(eles);
+					}else{
+						
+//						console.log("是标签选择器");
+						var eles = parents[j].getElementsByTagName(arr[i]);
+						child = eles;
+//for(var i=0;i<eles.length;i++){
+//							child.push(eles[i])
+//						}
+					}
+				}
+				parents = child;
+			}
+			return parents;
+		}
+		
+		
+		
+		function Jq(arg){
+			//存放获取到节点的容器；
+			this.elements = [];
+			if(typeof arg == "string"){
+//				console.log("类名、id名、标签名");
+				//通过id、class、标签获取节点
+				var eles = selectEles(arg);
+				console.log("得到的节点:",eles);
+				this.elements = eles;
+			}else if(typeof arg == "function"){
+//				console.log("要在页面加载完成之后执行函数");
+				//做兼容
+				ready(arg);
+//				document.addEventListener("DOMContentLoaded",arg,false);
+			}else{
+//				console.log("要获取原生节点");
+				if(arg.length==undefined){
+					this.elements.push(arg);
+				}else{
+					for(var i=0;i<arg.length;i++){
+						this.elements.push(arg[i]);
+					}
+				}
+				console.log(this.elements);
+			}
+		}
+		
+		function getStyle(obj,styleName){
+			if(window.getComputedStyle){
+				//主流浏览器
+				var styles = getComputedStyle(obj,null)[styleName];
+			}else{
+				//ie浏览器
+				var styles = obj.currentStyle[styleName];
+			}
+			return styles;
+		}
+		
+		function setStyle(obj,styleName,styleValue){
+			if(typeof styleValue == "number"){
+				styleValue  = styleValue + "px";
+			}
+			obj.style[styleName] = styleValue;
+		}
+		
+		
+		Jq.prototype.css = function(){
+			if(arguments.length==1){
+				if(typeof arguments[0]=="string"){
+					//参数是字符串；-->获取样式；
+					//$(".test").css("background");
+					var styles = getStyle(this.elements[0],arguments[0]);
+					console.log("样式是什么？",styles);
+				}else{
+					//参数是对象；
+					//$(".test").css({background:"red",width:100,height:100});
+					for(var i=0;i<this.elements.length;i++){
+						for(var j in arguments[0]){
+							
+							setStyle(this.elements[i],j,arguments[0][j]);
+							
+						}
+					}
+				}
+				
+			}else{
+				//传多个参数；
+				for(var i=0;i<this.elements.length;i++){
+						setStyle(this.elements[i],arguments[0],arguments[1]);
+				}
+			}
+			
+			
+			
+		}
+		
+		Jq.prototype.eq = function(index){
+			//$(document.getElementById("test"))
+			return new Jq(this.elements[index]);
+//			this.elements = [this.elements[index]];
+//			return this;
+		}
+		Jq.prototype.click = function(arg){
+			console.log(this.elements);
+			for(var i=0;i<this.elements.length;i++){
+				addEvent(this.elements[i],"click",arg);
+			}
+		}
+		
+		Jq.prototype.on = function(){
+			//第一个参数做容错，切割成数组；
+			var arg1 = arguments[0];
+			var reg1 = /^\s+|\s+$/g;
+			arg1 = arg1.replace(reg1,"");
+			var reg2 = /\s+/g;
+			arg1 = arg1.replace(reg2," ");
+//			console.log("第一参数:","("+arg1+")");
+			var arr = arg1.split(" ");
+			for(var i=0;i<this.elements.length;i++){
+				for(var j=0;j<arr.length;j++){
+					addEvent(this.elements[i],arr[j],arguments[1])
+				}
+			}
+		}
+		
+		//绑定事件兼容函数；
+		function addEvent(obj,eventName,fn){
+			if(window.addEventListener){
+				obj.addEventListener(eventName,fn,false);
+			}else{
+				obj.attachEvent("on"+eventName,fn);
+			}
+		}
+		
+		
+		
+		
+//		$("   .test1  div").eq(1).click(function(){
+//			alert(1111);
+//		}) 
+		
+//		$("  .test1   div").on("  click    mouseover   ",function(){
+//			alert(1111);
+//			
+//		})
+
+//		$("#myid").css("background");
+//		$(document.getElementsByClassName("test3"));
+//		$(" .test      div     .test2 ")
+//		$(document.getElementById("myid"));
+//		$(function(){alert(111)})
+//		$().click();
+//		$().test();
+
+
+		
+		
+	</script>
+</html>

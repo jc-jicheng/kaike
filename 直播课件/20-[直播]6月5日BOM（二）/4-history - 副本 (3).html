@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    最后一页
+    <button id="btn">返回</button>
+<script>
+console.log(history);
+{
+    let btn = document.querySelector("#btn");
+    btn.onclick = function(){
+        history.back();//返回上一页
+    };
+}    
+</script>    
+</body>
+</html>

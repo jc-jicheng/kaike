@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <input type="text" v-model.lazy="title" />
+        {{title}}
+        <hr>
+        <input type="text" v-model.number.trim="val" />{{val + 10}}
+
+        <!-- <img :src="" :alt=""> -->
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                title: 'vue 框架',
+                val: 1
+            }
+        });
+
+    </script>
+</body>
+</html>

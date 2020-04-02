@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 300px;
+            font: 20px/40px "宋体";
+            background: red;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>    
+<script src="mTween.js"></script>
+<script>
+{
+    let box = document.querySelector("#box");
+    css(box,"translateX",0);
+    css(box,"translateY",0);
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{passive:false});
+    window.addEventListener("devicemotion",(e)=>{
+        var motion = e.acceleration; //加速度
+        var motion2 = e.accelerationIncludingGravity;//(重力加速度 + 加速度);
+        var x =  motion2.x - motion.x;
+        var y =  motion2.y - motion.y;
+        var z =  motion2.z - motion.z;
+        box.innerHTML = 'x加速度:'+ x +'<br/>';
+        box.innerHTML += 'y加速度:'+ y +'<br/>';
+        box.innerHTML += 'z加速度:'+ z +'<br/>';
+    });
+
+}
+</script>
+</body>
+</html> 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var a = 1;         
+        // console.log(a); 
+
+        // 如果函数被小括号 包住之后 就不是一个函数声明了
+        // 是一个表达式 - 值
+        // 当函数声明的名称 与函数内部的变量名 相同时
+        // 在函数表达式的书写情况下 赋值会失效！
+        (function a(){ 
+             // 赋值  
+             a = 2;        
+             console.log(a) 
+         })()
+
+
+            // b();
+
+            var a=function b(){
+                console.log(1)
+            }
+
+            // a()
+
+            b();
+
+            // var a = function(){}  
+            // (function a(){})()
+
+
+
+    </script>
+</body>
+</html>

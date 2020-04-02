@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="getNow1">按钮一</button>
+        {{now1}}
+        
+        <hr>
+
+        <p>{{now2}}</p>
+        <button @click="showDate=true">showDate</button>
+        <p v-if="showDate">{{now2}}</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                now1: Date.now(),
+                showDate: false
+            },
+            methods: {
+                getNow1() {
+                    this.now1 = Date.now();
+                }
+            },
+            computed: {
+                now2() {
+                    return Date.now();
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

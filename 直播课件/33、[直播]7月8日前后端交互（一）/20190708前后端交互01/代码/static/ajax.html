@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ajaxTest</h1>
+    <button onclick="sub()">点击</button>
+    <!-- <form action="" enctype="application/x-www-form-urlencoded"></form> -->
+    <button onclick="xml()">点击获取xml</button>
+</body>
+<script>
+    function sub(){
+        // 发送ajax；
+        let xhr = new XMLHttpRequest();
+        xhr.open("post","/post",true);
+        // xhr.setRequestHeader("content-type","application/x-www-form-urlencoded")
+        // xhr.setRequestHeader("content-type","application/json");
+        xhr.onload = function(){
+            // console.log(xhr.readyState,xhr.status);
+            console.log(JSON.parse(xhr.responseText));
+        }
+        // xhr.onreadystatechange = function(){
+        //     if(xhr.readyState==4 && xhr.status==200){
+        //         console.log(xhr.responseText);
+        //     }
+        // }
+        // let data = "name=zhangsan&age=20";
+        let data = JSON.stringify({
+            name:"张三",
+            age:20
+        })
+        xhr.send(data);
+    }
+
+    function xml(){
+        let xhr = new XMLHttpRequest();
+        xhr.open("post","/xml",true);
+        // xhr.setRequestHeader("content-type","application/x-www-form-urlencoded")
+        xhr.setRequestHeader("content-type","application/json");
+        // 前端重写response里的content-type
+        xhr.overrideMimeType("text/xml");
+        xhr.onload = function(){
+            console.log(xhr.responseXML);
+        }
+        let data = JSON.stringify({
+            name:"张三",
+            age:20
+        })
+        xhr.send(data);
+    }
+</script>
+</html>

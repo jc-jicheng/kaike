@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <user-info content="我是 zMouse"></user-info>
+    <user-info content="我是 Reci"></user-info>
+
+    <script>
+
+        class UserInfo extends HTMLElement {
+            constructor() {
+                super();
+
+                let shadow = this.attachShadow({ mode: 'open' });
+
+                let style = document.createElement('style');
+                style.textContent = `span {color:red}`;
+
+                let span = document.createElement('span');
+                span.innerHTML = this.getAttribute('content');
+                span.classList.add('cred');
+
+                shadow.appendChild(style);
+                shadow.appendChild(span);
+            }
+        }
+
+        customElements.define('user-info', UserInfo);
+
+        let userInfo = document.querySelector('user-info');
+
+    </script>
+
+</body>
+
+</html>

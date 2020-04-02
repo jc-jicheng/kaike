@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!-- <script>
+setTimeout(function(){
+    console.log(a);
+},1000);
+</script>   -->
+<script>
+console.log(fn);
+if(false){
+    function fn(){
+        console.log(1);
+    }
+}
+var a = 0;
+var fn = function(){};//预解析的过程中，不会去预解析 = 号 右侧的值
+/*
+预解析机制:
+    var 在 JS 中，代码执行前，JS 本身会先执行一个预解析的过程，如果 碰到 var 关键字,就会把这个声明提升 script 标签或者其所在作用域的最前边
+    function 如果是 function 声明的函数体，在预解析的过程中，一般情况会把整个函数体 预解析到我们 var 声明后边，但是函数体声明在流程控制语句中, 预解析只会把 声明 提升到前边去
+
+    整个预解析过程执行完之后，JS 再会从上到下 一步 一步 执行 我们的代码;
+
+在哪使用，在哪声明，先声明再使用
+
+*/
+
+
+</script>    
+</body>
+</html>

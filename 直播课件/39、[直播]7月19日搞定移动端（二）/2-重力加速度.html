@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            font: 20px/40px "宋体";
+            background: red;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>  
+<script>
+    var box = document.querySelector("#box");
+    /*
+        devicemotion: 监听手机加速度发生变化
+            - acceleration 存储的手机相应的加速度
+    */
+    window.addEventListener("devicemotion",(e)=>{
+        alert(1);
+        var  motion = e.accelerationIncludingGravity;
+        /*
+            x: 手机宽度方向
+            y: 手机高度方向
+            z: 手机厚度方向
+        */
+        box.innerHTML = 'x加速度:'+ motion.x +'<br/>';
+        box.innerHTML += 'y加速度:'+ motion.y +'<br/>';
+        box.innerHTML += 'z加速度:'+ motion.z +'<br/>';
+    });
+</script>  
+</body>
+</html>

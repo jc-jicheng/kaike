@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="data.js"></script>
+    <style>
+        li ul {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="list">
+    <!-- <ul>
+        <li>
+            <p>第一级菜单</p>
+            <ul>
+                <li>
+                    <p>第二级菜单</p>
+                    <ul>
+                        <li>
+                            <p>第三级菜单</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>     -->
+</div>
+<script>
+{
+    let list = document.querySelector("#list");
+    
+    let topPid = -1;
+
+    // 根据 Pid 找到对应子级
+    function getChild(id){
+        return data.filter(item=>item.pid ==id);
+    }
+
+    list.appendChild(renderList(topPid));
+    // 渲染整个列表结构
+    function renderList(pid){
+        let child = getChild(pid);
+        let ul = document.createElement("ul");
+        child.forEach(item=>{
+            let li = document.createElement("li");
+            let p = document.createElement("p");
+            p.innerHTML = item.title;
+            
+
+
+            li.appendChild(p);
+            if(getChild(item.id).length > 0){
+                li.appendChild(renderList(item.id));
+            }
+            ul.appendChild(li);
+        });
+        return ul;
+    }
+}    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>上移下移</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url(./imgs/bg.png) no-repeat;
+            background-size: 100% 100%;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrap {
+            width: 400px;
+            margin: 250px auto;
+        }
+        .wrap ul {
+            position: relative;
+            overflow: hidden;
+        }
+
+        li {
+            width: 400px;
+            height: 52px;
+            line-height: 52px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        li .line {
+            width: 3px;
+            height: 20px;
+            float: left;
+            background-color: #fd8e9f;
+            margin-left: 25px;
+            margin-top: 17px;
+        }
+
+        li .name {
+            float: left;
+            margin-left: 10px;
+        }
+
+        li .ctrl {
+            width: 110px;
+            float: right;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            text-align: center;
+            margin-top: 12px;
+            color: #fd8e9f;
+            margin-right: 10px;
+        }
+
+        li .ctrl span {
+            width: 48px;
+            height: 26px;
+            line-height: 26px;
+            border: 1px solid #fd8e9f;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+    <ul>
+        <li>
+            <span class="line"></span>
+            <span class="name">jQuery</span>
+            <div class="ctrl">
+                <span class="up">上移</span>
+                <span class="down">下移</span>
+            </div>
+        </li>
+        <li>
+            <span class="line"></span>
+            <span class="name">AJAX</span>
+            <div class="ctrl">
+                <span class="up">上移</span>
+                <span class="down">下移</span>
+            </div>
+        </li>
+        <li>
+            <span class="line"></span>
+            <span class="name">JS基础</span>
+            <div class="ctrl">
+                <span class="up">上移</span>
+                <span class="down">下移</span>
+            </div>
+        </li>
+        <li>
+            <span class="line"></span>
+            <span class="name">移动端实战</span>
+            <div class="ctrl">
+                <span class="up">上移</span>
+                <span class="down">下移</span>
+            </div>
+        </li>
+        <li>
+            <span class="line"></span>
+            <span class="name">canvas游戏</span>
+            <div class="ctrl">
+                <span class="up">上移</span>
+                <span class="down">下移</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="./fns.js"></script>
+<script>
+{
+    let ul = document.querySelector(".wrap ul")
+    let lis = ul.querySelectorAll(".wrap li");
+    // 一个 li 到 上一个 li 的距离
+    let disLi = lis[1].offsetTop - lis[0].offsetTop;
+    let disLastLi = lis[lis.length-1].offsetTop - lis[0].offsetTop;
+    /*
+        有什么不同?
+            ul.querySelectorAll("li")
+            ul.children 
+    */
+    lis.forEach(li => {
+        css(li,"translateY",0);
+        let up = li.querySelector(".up");
+        let down = li.querySelector(".down");
+        let op = {
+            type: "easeOut",
+            time: 400
+        }
+
+        // 上移
+        up.onclick = function(){
+            let prevEle = li.previousElementSibling;
+            if(prevEle){
+                // li 向上移动一列， prevEle向下移动一列
+                // 只是改了位置，并没有该在 DOM 中的顺序
+                mTween({
+                    el: li,
+                    attr: {
+                        translateY: -disLi
+                    },
+                    ...op
+                });
+                mTween({
+                    el: prevEle,
+                    attr: {
+                        translateY: disLi
+                    },
+                    ...op,
+                    cb(){
+                        //交互在 DOM 中的顺序
+                        ul.insertBefore(li,prevEle);
+                        css(li,"translateY",0);
+                        css(prevEle,"translateY",0);
+                    }
+                });
+            } else {
+                // li 移动到最末尾，然后 其余li 依次 向上移动
+                lis.forEach(item=>{
+                    if(item === li){
+                        mTween({
+                            el: li,
+                            attr: {
+                                translateY: disLastLi
+                            },
+                            ...op,
+                            cb(){
+                               ul.appendChild(li); 
+                               lis.forEach(li=>{
+                                   css(li,"translateY",0)
+                               });
+                            }
+                        });
+                    } else {
+                        mTween({
+                            el: item,
+                            attr: {
+                                translateY: -disLi
+                            },
+                            ...op
+                        });
+                    }
+                })
+            }
+            //console.log(prevEle);
+            /*
+                如果当前没有上一个兄弟节点，
+                    当前li 移动到最下边去
+                     否则
+                    向上移动一列
+            */
+        };
+
+        // 下移
+        down.onclick = function(){
+            /*
+                如果当前没有下一个兄弟节点，
+                    当前li 移动到最上边去
+                     否则
+                    向下移动一列
+            */
+           let nextEle = li.nextElementSibling;
+           if(nextEle){
+                mTween({
+                    el: li,
+                    attr: {
+                        translateY: disLi
+                    },
+                    ...op
+                });
+                mTween({
+                    el: nextEle,
+                    attr: {
+                        translateY: -disLi
+                    },
+                    ...op,
+                    cb(){
+                        ul.insertBefore(nextEle,li);
+                        css(li,"translateY",0);
+                        css(nextEle,"translateY",0);
+                    }
+                })
+           } else {
+            lis.forEach(item=>{
+                if(item === li){
+                    mTween({
+                        el: li,
+                        attr: {
+                            translateY: -disLastLi
+                        },
+                        ...op,
+                        cb(){
+                            ul.insertBefore(li,ul.firstElementChild); 
+                            lis.forEach(li=>{
+                                css(li,"translateY",0)
+                            });
+                        }
+                    });
+                } else {
+                    mTween({
+                        el: item,
+                        attr: {
+                            translateY: disLi
+                        },
+                        ...op
+                    });
+                }
+            })
+           }
+        }
+    });
+
+}    
+</script>
+</body>
+</html>

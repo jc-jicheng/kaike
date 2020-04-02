@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin: 100px auto;
+            /* 
+                过渡：1s （1秒）
+             */
+            transition: 1s;
+
+            /* 
+                控制旋转轴位置
+                left
+                top
+                right
+                bottom
+                center
+                px
+             */
+             /* transform-origin:left top; */
+             /* transform-origin:right bottom; */
+             transform-origin: 0 200px;
+
+        }
+        div:hover{
+            background: yellow;
+
+            transform: rotate(60deg);
+
+            /* 旋转 deg单位
+                transform: rotate(30deg); z轴
+                transform: rotateX(90deg); x轴
+                transform: rotateY(90deg); y轴
+            */
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

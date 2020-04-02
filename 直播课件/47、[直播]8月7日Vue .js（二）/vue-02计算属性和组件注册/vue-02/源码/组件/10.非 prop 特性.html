@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <kkb-component style="background: red" :n="1" id="kkb1" val="开课吧"></kkb-component>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const KKBComponent = {
+            inheritAttrs: false,
+            data() {
+                // console.log(this.$attrs);
+                return {};
+            },
+            props: ['n'],
+            template: `<div style="height: 200px;" id="kkb2">{{n}}</div>`
+        }
+
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    
+                }
+            },
+            components: {
+                'kkb-component': KKBComponent
+            }
+        });
+    </script>
+
+</body>
+
+</html>

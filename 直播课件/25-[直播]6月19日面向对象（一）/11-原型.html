@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    
+</body>
+<script>
+//    构造函数:1.约定俗成 首字母大写；2.方法会放在原型上；
+// 原型上预定义有一个constructor 指向 构造函数；
+    function Tab(name){
+        this.name = name;
+        this.age  = 20;
+    }
+    // Tab.prototype.psFor = function(){
+    //     console.log("psFor....");
+    // }
+    // // Tab.prototype.height = "178cm";
+    // Tab.prototype.fn = function(){
+    //     console.log("fn...");
+    // }
+    Tab.prototype = {
+        constructor:Tab,
+        psFor(){
+            console.log("psFor....");
+        },
+        fn(){
+            console.log("fn...");
+        }
+    }
+    console.log(Tab.prototype.constructor);
+
+// 原型； prototype; 公共空间
+
+// 调用 new-->实例化   tab1 是 对象；
+let tab1 = new Tab("张三");
+// tab1.psFor();
+console.log(tab1.__proto__===Tab.prototype);
+// let tab2 = new Tab("李四");
+// console.log(tab1.psFor===tab2.psFor);
+
+
+</script>
+
+</html>

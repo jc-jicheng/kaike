@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <my-dialog title="标题123">
+        <div>这是内容</div>
+
+        <div slot="footer">
+            <button>ok</button>
+            <button>cancel</button>
+        </div>
+    </my-dialog>
+
+
+    <script>
+    
+        class MyDialog extends HTMLElement {
+
+            constructor() {
+                super();
+                this.shadow = this.attachShadow({ mode: 'open' });
+
+                this.title = this.getAttribute('title');
+
+                this.renderHTML();
+                this.renderStyle();
+            }
+
+            renderHTML() {
+                let html = `
+                    <div class="dialog">
+                        <i class="dialog_close_btn"></i>
+                        <div class="dialog_header">
+                            <span class="dialog_title">${this.title}
+                            </span>
+                        </div>
+                        <div class="dialog_content">
+                            <slot />
+                        </div>
+                        <hr />
+                        <div class="dialog_footer">
+                            <slot name="footer" />
+                        </div>
+                    </div>
+                `;
+                this.shadow.innerHTML = html;
+            }
+
+            renderStyle() {
+                let style = `
+                    .dialog {
+                        position: fixed;
+                        left: 50%;
+                        top: 30%;
+                        transform: translateX(-50%) translateY(-50%);
+                        border-radius: 2px;
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+                        box-sizing: border-box;
+                        background: #fff;
+                        width: 30%;
+                    }
+
+                    .dialog_header {
+                        padding: 20px 20px 0;
+                        text-align: left;
+                    }
+
+                    .dialog_title {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: #1f2d3d;
+                    }
+
+                    .dialog_content {
+                        padding: 30px 20px;
+                        color: #48576a;
+                        font-size: 14px;
+                        text-align: left;
+                    }
+
+                    .dialog_close_btn {
+                        position: absolute;
+                        right: 10px;
+                        top: 5px;
+                    }
+
+                    .dialog_close_btn:before {
+                        content: 'x';
+                        color: #999;
+                        font-size: 20px;
+                        cursor: pointer;
+                    }
+                `;
+                let styleEle = document.createElement('style');
+                styleEle.innerHTML = style;
+                this.shadow.appendChild(styleEle);
+            }
+
+        }
+
+        customElements.define('my-dialog', MyDialog);
+
+    </script>
+</body>
+</html>

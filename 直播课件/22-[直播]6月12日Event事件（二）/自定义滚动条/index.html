@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义滚动条</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url(./imgs/bg.png) no-repeat;
+            background-size: 100% 100%;
+            overflow-y: hidden;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+        }
+
+        .wrap {
+            width: 100px;
+            height: 387px;
+            background-color: #fdfdfd;
+            position: relative;
+            border-radius: 10px;
+            margin: 200px auto;
+            padding-top: 11px;
+            padding-bottom: 16px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .scroll-wrap {
+            width: 15px;
+            height: 365px;
+            background-color: #dedede;
+            position: absolute;
+            top: 11px;
+            right: 7px;
+            border-radius: 10px;
+        }
+
+        .scroll {
+            width: 13px;
+            height: 30px;
+            background-color: #fcfcfc;
+            margin: 1px;
+            border-radius: 10px;
+            position: absolute;
+        }
+
+        li {
+            line-height: 36px;
+            text-indent: 21px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="list"></ul>
+        <div class="scroll-wrap">
+            <div class="scroll"></div>
+        </div>
+    </div>
+    <script src="./miaov.js"></script>
+    <script>
+        let arr = ['河北', '山西', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西',
+            '山东', '河南', '湖北', '湖南', '广东', '海南', '四川', '贵州', '云南', '陕西', '甘肃', '青海', '台湾',
+            '北京', '天津', '上海', '重庆'
+        ];
+        let wrap = document.querySelector('.wrap')
+        let list = document.querySelector('.list');
+        let scrollWrap = document.querySelector('.scroll-wrap');
+        let scrollBar = document.querySelector('.scroll');
+
+        list.innerHTML = arr.map(item => {
+            return `<li>${item}</li>`
+        }).join('');
+
+        drag(scrollBar, scrollWrap, wrap, list)
+
+
+        function drag(obj, objall, objcontent, objcontent1) {
+            obj.onmousedown = function (e) {
+                e = e || event; //为了兼容性
+                var firstY = e.clientY; //获取到点击的纵坐标
+                var height = obj.offsetHeight; //获取到高度
+                var Top = obj.offsetTop; //获取到距离的高度
+                var disy = firstY - Top;
+                document.onmousemove = function (e) {
+                    e = e || event;
+                    e.preventDefault();
+                    var T = e.clientY - disy;
+                    if (T < 0) {
+                        T = 0;
+                    } else if (T > objall.offsetHeight - 30) {
+                        T = objall.offsetHeight - 30;
+                    }
+                    obj.style["top"] = T + "px";
+                    var overHeight = objcontent1.offsetHeight - objcontent.offsetHeight;
+                    var percent = T / (objall.offsetHeight - 30);
+                    var topcontent = percent * overHeight; //获取到高度
+                    objcontent1.style["top"] = -topcontent + "px";
+
+                }
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                }
+            }
+        }
+        let y = 0;
+        wrap.onmousewheel = function (e) {
+            var event1 = event || e
+            if (event.wheelDelta < 0) {
+                //滑动条向下滚动 
+                y += 10;
+            } else if (event.wheelDelta > 0) {
+                //滑动条向上滚动 
+                y -= 10;
+            }
+            //y变化时说明在滚动，此时使滚动条发生滚动，以及设置content内容部分滚动 
+            //判断极端情况，滑块不能划出屏幕 
+            if (y <= 0) {
+                //滑块最多滑到顶部 
+                y = 0;
+            }
+            if (y >= scrollWrap.clientHeight - scrollBar.clientHeight) {
+                //滑块最多滑到最底部 
+                y = scrollWrap.clientHeight - scrollBar.clientHeight;
+            }
+            //更新滑块的位置 
+            scrollBar.style.top = y + "px";
+            scale = scrollWrap.clientHeight / list.clientHeight;
+            list.style.top = -y / scale + "px";
+        }
+    </script>
+</body>
+
+</html>

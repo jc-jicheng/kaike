@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    
+        var a = 1;
+
+        function fn1() {
+            // f1 = {b:2, fn2: fn2, scope: [global]}
+            var b = 2;
+            console.log(a);
+
+            function fn2() {
+                // {c:3, scope: [f1]}
+                var c = 3;
+                console.log(b);
+                console.dir(fn2);
+            }
+
+            fn2();
+        }
+
+        function fn2() {
+            var a = 10;
+            console.log(a);
+        }
+
+        console.log(a);
+        fn1();
+        fn2();
+
+    </script>
+</body>
+</html>

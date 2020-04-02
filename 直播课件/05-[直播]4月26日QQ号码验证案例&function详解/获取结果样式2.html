@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width:100px; height:100px; background:red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+         function e(str){
+            return document.querySelector(str);
+        }
+
+        // 行间样式
+    //    var wid= e('div').style.width;
+
+    // 获取非行间样式 get Computed Style -> 获取 计算后 样式
+    // getComputedStyle(obj)[attr]
+    var wid=getComputedStyle(e('div'))['width'];
+       console.log(wid);
+
+    //    兼容性问题 
+    // IE8- 浏览器 不支持getComputedStyle 
+    //函数和return 可以帮助我们解决兼容问题
+    // obj.currentStyle.attr
+
+    // console.log(e('div').currentStyle)
+    // unedefined -> false
+
+    function getStyle(obj,attr){
+        if(obj.currentStyle){
+            return obj.currentStyle[attr];
+        }else{
+            return getComputedStyle(obj)[attr];
+        }
+    }
+
+    console.log(getStyle(e('div'),'backgroundColor'));
+
+
+    </script>
+</body>
+</html>

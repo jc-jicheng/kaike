@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+        .box{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+            /* 调用动画帧 */
+            /*  
+                run 动画帧名称
+                1s 运动时间
+                2s 延时动画时间
+                linear 匀速
+                infinite 无限运动次数
+            */
+            animation:infinite run 1s 2s linear ;
+        }
+
+        /* 定义动画帧 */
+        @keyframes run{
+           /* 0%-100% */
+           0%{
+             left:0;
+             top:0;
+           }
+           25%{
+             left:300px;
+             top:0;
+           }
+           50%{
+             left:300px;
+             top:300px;
+           }
+           75%{
+             left:0px;
+             top:300px;
+           }
+           100%{
+             left:0px;
+             top:0px;
+           }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+
+
+    </div>
+</body>
+</html>

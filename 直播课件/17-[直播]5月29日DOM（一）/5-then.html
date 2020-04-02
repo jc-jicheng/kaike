@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(1);
+            resolve();
+        },1000);
+}).then((info)=>{
+    // 如果 then 中 也有一个 异步处理，一定记得 给它在返回一个 Promise
+    setTimeout(()=>{
+        console.log(2);
+    },1000)
+}).then((info)=>{
+    setTimeout(()=>{
+        console.log(3);
+    },1000)
+}).then((info)=>{
+    setTimeout(()=>{
+        console.log(4);
+    },1000)
+})
+
+/*
+    then 返回值 是一个新的 promise
+          新的 promise：
+                1. then 的回调中 没有返回值,   promise 状态就是一个 resolved
+                2. then 的回调中有返回值，但是返回值不是一个 promise 对象, then 依然会返回一个状态为 resolved 的 promise，并且 会把返回值 当做resolve 的参数 传给下一个then
+                3. then 的回调中返回值是 一个  promise 对象，就会覆盖掉 then 本身的 promise 对象
+*/
+</script>    
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://www.baidu.com">百度</a>
+    <br />
+    <input type="text" />
+    <ul id="list"></ul>
+<script>
+{
+    let list = document.querySelector("#list");
+    list.innerHTML = [...(".".repeat(100))].map((item,index)=>{
+        return `<li>这是第${index}个li</li>`;
+    }).join("");
+    list.addEventListener("click",()=>{
+        alert("111");
+    })
+}
+// 在 move 中阻止默认事件
+/*
+    1. 不能进行滑动
+    2. 不能进行双指缩放
+*/
+{
+    document.addEventListener("touchmove",(e)=>{
+        e.preventDefault();
+    },{
+        passive: false
+    })
+}
+</script>          
+</body>
+</html>

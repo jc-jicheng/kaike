@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 会覆盖
+        // document.onclick=function(){
+        //     alert(123);
+        // }
+
+        // document.onclick=function(){
+        //     alert(456);
+        // }
+
+        // IE8- 不支持css3.0样式
+
+        // 采用事件绑定的方法，事件名不用加on
+        document.addEventListener('click',function(){
+            alert(123);
+        });
+        document.addEventListener('click',function(){
+            alert(456);
+        });
+    </script>
+</body>
+</html>

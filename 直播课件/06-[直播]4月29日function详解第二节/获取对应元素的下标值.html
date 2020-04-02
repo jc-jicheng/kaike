@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            list-style: none;
+            width: 200px;
+            height: 100px;
+            background: red;
+            float: left;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+
+        // 利用了一个闭包 保存了一个局部作用域变量
+        // 以函数参数形式传递的
+        // 每次循环生成的都是一个新的作用域执行环境
+        // 函数作用域 ： 会将作用域下的局部变量、函数 存到一个单独的空间下
+
+        var lis=document.querySelectorAll('li');
+
+        //for会执行3次
+        for(var i=0; i<lis.length;i++){
+            // 在函数体后面直接加()会有语法错误
+            (function(index){
+                console.log(index)
+                lis[index].onclick=function(){
+                    // 弹出对应的元素下标(索引值)
+                    alert(index);
+                }
+            })(i)
+        }
+
+
+        // (function(index){
+        //     var index=0;
+        //     console.log(0)
+        //     lis[0].onclick=function(){
+        //         // 弹出对应的元素下标(索引值)
+        //         alert(0);
+        //     }
+        // })(0)
+
+        // (function(index){
+        //     var index=1;
+        //     console.log(1)
+        //     lis[1].onclick=function(){
+        //         // 弹出对应的元素下标(索引值)
+        //         alert(1);
+        //     }
+        // })(1)
+
+        // (function(index){
+        //     var index=2;
+        //     console.log(2)
+        //     lis[2].onclick=function(){
+        //         // 弹出对应的元素下标(索引值)
+        //         alert(2);
+        //     }
+        // })(2)
+
+        
+
+    </script>
+</body>
+</html>

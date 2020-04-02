@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <user-info>
+        <span>...</span>
+    </user-info>
+    
+    <script>
+    
+        class UserInfoElement extends HTMLElement {
+
+            constructor() {
+                super();
+
+                console.log('我是自定义元素');
+
+                let shadow = this.attachShadow({mode: 'closed'});
+
+                let html = `
+                    <h1>zMouse</h1>
+                    <p>我是子鼠</p>
+                `;
+
+                // document.body.innerHTML = html;
+
+                shadow.innerHTML = html;
+            }
+
+        }
+
+        customElements.define('user-info', UserInfoElement);
+
+        let userInfo = document.querySelector('user-info');
+        // console.dir(userInfo.shadowRoot);
+
+    </script>
+
+</body>
+</html>

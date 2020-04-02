@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #box {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            #box2 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: green;
+            }
+            #box3 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<script>
+{
+    let box = document.querySelector("#box");
+    let box2 = document.querySelector("#box2");
+    let box3 = document.querySelector("#box3");
+    box.addEventListener("click",function(){
+        console.log(1);
+    });
+    box2.addEventListener("click",function(){
+        console.log(2);
+    });
+    box3.addEventListener("click",function(){
+        console.log(3);
+    });
+    // 事件冒泡: 打了小的,惹了老的 
+    // 当元素触发事件之后，事件会从目标元素开始由下至上逐级依次传播，直到window对象为止，在传递过程中元素也有对应的事件就会执行，这个过程就是冒泡。
+
+    
+}
+</script>    
+</body>
+</html>

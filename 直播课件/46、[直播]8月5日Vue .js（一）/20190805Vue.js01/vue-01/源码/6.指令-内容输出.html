@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <!-- <p>title: {{title}}</p>
+        <p v-text="title"></p>
+        <p v-text="'title: ' + title"></p> -->
+        <!-- <p v-cloak>title: {{title}}</p> -->
+
+        <p>{{content}}</p>
+        <p v-html="content"></p>
+
+        <p>title: {{title}}</p>
+        <p v-once>{{title}}</p>
+
+        <p v-pre>
+            vue使用双大括号来输出内容，比如：{{title}}
+        </p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                title: 'vue 框架',
+                content: '<button>按钮</button>'
+            }
+        });
+
+    </script>
+</body>
+</html>

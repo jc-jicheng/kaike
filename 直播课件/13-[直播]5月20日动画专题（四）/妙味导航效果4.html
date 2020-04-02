@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+            display: block;
+            height: 36px;
+            line-height: 36px;
+            /* border: 1px solid red; */
+            padding: 0 10px;
+            /* 背面隐藏 */
+            backface-visibility: hidden;
+        }
+
+        nav{
+            width: 600px;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        ul{
+            border: 1px solid #000;
+            height: 36px;
+            overflow: hidden;
+        }
+
+        li{
+            perspective: 300px;
+            transform-style: preserve-3d;
+            float: left;
+            transition: .5s;
+            transform-origin:center center -18px;
+            height: 36px;
+        }
+
+        .show{
+            color: red;
+            transform: rotateX(-90deg);
+            transform-origin:center top ;
+        }
+
+        li:hover{
+            transform: rotateX(90deg);
+        }
+
+
+        .line{
+            width: 60px;
+            height: 4px;
+            background: pink;
+            position: absolute;
+            top: 46px;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <ul>
+            <li>
+                <a href="#">导航</a>
+                <a href="#" class="show">导航</a>
+            </li>
+            <li>
+                <a href="#">关于我们</a>
+                <a href="#" class="show">关于我们</a>
+            </li>
+            <li>
+                <a href="#">联系我</a>
+                <a href="#" class="show">联系我</a>
+            </li>
+            <li>
+                <a href="#">留言板</a>
+                <a href="#" class="show">留言板</a>
+            </li>
+        </ul>
+        <span class="line"></span>
+    </nav>
+
+    <script src="mTween.js"></script>
+    <script>
+        // 1. 鼠标移入 改变 元素中的文字位置
+        // 2. 鼠标移入 获取到元素位置  并且改变 横条的位置   
+        
+        var line=document.querySelector('.line');
+        var lis=document.querySelectorAll('li');
+        var arrLis=[...lis];
+
+        arrLis.forEach(function(ele){
+            ele.addEventListener('mouseover',function(){
+                // 元素的位置 获取元素在定位元素的相对位置
+                var l=this.offsetLeft;
+                
+                // 改变line的位置
+                // line.style.left=l+'px';
+                move({
+                    el:line,
+                    attrs:{
+                        left:l
+                    }
+                })
+            })
+        })
+        
+
+        
+    </script>
+</body>
+</html>

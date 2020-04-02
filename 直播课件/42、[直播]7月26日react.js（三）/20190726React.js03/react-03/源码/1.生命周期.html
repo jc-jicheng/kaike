@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        ajax({
+            url: '/getData',
+            start() {
+                console.log('...');
+            },
+            progress() {
+                
+            },
+            success(data) {
+                console.log(data);
+            }
+        });
+    
+        function ajax(options) {
+
+            let opts = Object.assign({
+                method: 'get',
+                url: '',
+                data: '',
+                start() {},
+                progress() {},
+                success() {}
+            }, options);
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.onload = function() {
+                opts.success(this.responseText);
+            }
+
+            opts.start();
+            xhr.open( opts.method, opts.url, true );
+            xhr.send(opts.data);
+            opts.progress();
+
+        };
+
+    </script>
+    
+</body>
+</html>

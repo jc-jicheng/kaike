@@ -1,0 +1,69 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+.box {
+  width: 612px;
+  height: 640px;
+  margin: 30px auto;
+  background: url("./images/bg.png");
+  background-size: contain;
+  position: relative;
+}
+
+.put {
+  position: relative;
+  left: 144px;
+  top: 156px;
+}
+input[type="text"] {
+  width: 180px;
+  height: 33px;
+  padding-left: 20px;
+  border: solid 1px #e15671;
+  outline: none;
+}
+input[type="button"] {
+  width: 60px;
+  height: 35px;
+  border: solid 1px #e15671;
+  border-radius: 5px;
+  outline: none;
+}
+.save {
+  color: #fff;
+  background: #e15671;
+}
+.edit,
+.cancel {
+  color: #e15671;
+  background: #fff;
+}
+#list {
+  width: 351px;
+  background: #fff;
+  position: absolute;
+  left: 130px;
+  top: 232px;
+}
+#list li {
+  height: 65px;
+  line-height: 65px;
+}
+#list span {
+  float: left;
+  margin-left: 24px;
+}
+
+#list i {
+  width: 20px;
+  height: 20px;
+  margin: 22px 0 0 20px;
+  vertical-align: middle;
+  float: left;
+  background: url("./images/edit.png") no-repeat;
+  background-size: contain;
+}

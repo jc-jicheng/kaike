@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>水滴按钮</title>
+    <style>
+        .course-list-more {
+            width: 870px;
+            position: relative;
+            height: 42px;
+        }
+
+        @keyframes loadBtn {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            20% {
+                transform: scale(1.2, .8);
+            }
+
+            40% {
+                transform: scale(.8, 1.2);
+            }
+
+            60% {
+                transform: scale(1.1, .9);
+            }
+
+            80% {
+                transform: scale(.9, 1.1);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .course-list-more .btn {
+            position: absolute;
+            left: 414px;
+            top: 0px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font: 12px/42px "微软雅黑";
+            /* color: #9aabb7; */
+            text-align: center;
+            cursor: pointer;
+            z-index: 2;
+            background: #9aabb7;
+            color: #fff;
+        }
+
+        .course-list-more .btn.animation-start {
+            animation: .8s loadBtn;
+        }
+
+        .course-list-more .loading {
+            position: relative;
+            z-index: 1;
+            padding: 16px 0;
+            height: 10px;
+            text-align: center;
+            transform: scale(1)
+        }
+
+        .course-list-more .loading span {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 3px;
+            width: 10px;
+            height: 10px;
+            /* border: 1px solid #9aabb7; */
+            border-radius: 50%;
+            background: #9aabb7;
+        }
+
+        @keyframes loading-icon1 {
+            0% {
+                transform: translateX(16px);
+            }
+
+            100% {
+                transform: translateX(0px);
+            }
+        }
+
+        @keyframes loading-icon2 {
+            0% {
+                transform: translateX(-16px);
+            }
+
+            100% {
+                transform: translateX(0px);
+            }
+        }
+
+        .course-list-more .loading.open span:nth-child(1) {
+            animation: loading-icon1 .2s ease-out infinite alternate;
+        }
+
+        .course-list-more .loading.open span:nth-child(3) {
+            animation: loading-icon2 .2s ease-out infinite alternate;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="course-list-more">
+        <a class="btn animate auto-animate">More</a>
+        <div class="loading">
+            <!-- <span></span><span></span><span></span> -->
+        </div>
+    </div>
+    
+</body>
+
+</html>

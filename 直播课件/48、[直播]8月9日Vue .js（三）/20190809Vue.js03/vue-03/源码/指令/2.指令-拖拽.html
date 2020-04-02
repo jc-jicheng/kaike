@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app">
+        <button @click="canDrag = !canDrag">Drag : {{canDrag}}</button>
+        <div class="box" v-drag.limit="canDrag"></div>
+
+        <!-- <kkb-drag>
+            <div>
+                <p>ddsds</p>
+            </div>
+        </kkb-drag> -->
+
+        <!-- <div v-contextmenu="menus1"></div>
+        <div v-contextmenu="menus2"></div> -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+        Vue.directive('drag', {
+            bind(el, binding) {
+                // console.log('bind');
+                let {modifiers, value} = binding;
+                el.canDrag = value;
+                let isDragStart = false;
+                let disX = 0;
+                let disY = 0;
+
+                el.addEventListener('mousedown', e => {
+                    if (!el.canDrag) return;
+
+                    isDragStart = true;
+                    disX = e.clientX - el.offsetLeft;
+                    disY = e.clientY - el.offsetTop;
+
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', e => {
+                    if (!isDragStart) return ;
+                    let x = e.clientX - disX;
+                    let y = e.clientY - disY;
+
+                    if (modifiers.limit) {
+                        if (x < 0) {
+                            x = 0;
+                        }
+                        if (y < 0) {
+                            y = 0;
+                        }
+                    }
+
+                    el.style.left = x + 'px';
+                    el.style.top = y + 'px';
+                });
+
+                document.addEventListener('mouseup', e => {
+                    isDragStart = false;
+                });
+            },
+            componentUpdated(el, {value}) {
+                console.log('componentUpdated', value);
+                el.canDrag = value;
+            }
+        });
+    
+        new Vue({
+            el: '#app',
+            data: {
+                canDrag: false
+            }
+        });
+
+    </script>
+
+</body>
+</html>

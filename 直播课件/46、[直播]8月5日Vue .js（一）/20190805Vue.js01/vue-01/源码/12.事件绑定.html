@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <button v-on:click="val++">按钮</button>
+        {{val}}
+        <hr>
+        
+        <button v-on:click="increment">按钮</button>
+        {{val2}}
+
+        <hr>
+        <button v-on:click="increment2()">按钮</button>
+        {{val2}}
+
+        <hr>
+        <ul>
+            <li v-for="user of users" :key="user.id" @click="toUpperCase(user, $event)">
+                {{user.username}}
+            </li>
+        </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                val: 1,
+                val2: 1,
+                users: [
+                    {id: 1, username: 'baogege'},
+                    {id: 2, username: 'mt'},
+                    {id: 3, username: 'haigege'}
+                ]
+            },
+            methods: {
+                increment(e) {
+                    console.log(e);
+                    this.val2++;
+                },
+                increment2() {
+                    // app.increment();
+                    this.increment();
+                },
+                toUpperCase(user, e) {
+                    console.log(user);
+                    console.log(e);
+                    user.username = user.username.toUpperCase();
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

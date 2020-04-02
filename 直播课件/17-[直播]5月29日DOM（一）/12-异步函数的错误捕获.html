@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+错误捕获
+try{
+
+}catch(e){
+
+}
+*/
+// try{
+//     console.log(a);
+// } catch(e) {
+//     console.log(e);
+// }
+// let b = 1;
+// console.log(b);
+
+// async function fn(){
+//     try{
+//         await new Promise((resolve,reject)=>{
+//             setTimeout(()=>{
+//                 console.log(1);
+//                 resolve();
+//             },1000);
+//         });
+//         await new Promise((resolve,reject)=>{
+//             setTimeout(()=>{
+//                 console.log(2);
+//                 reject("这是第2个 Promise 出错了");
+//             },1000);
+//         });
+//         await new Promise((resolve,reject)=>{
+//             setTimeout(()=>{
+//                 console.log(3);
+//                 resolve();
+//             },1000);
+//         });
+//     }catch(e){
+//         console.log(e);
+//     }
+// }
+async function fn(){
+    // arr.forEach(function(item){
+    //     try{
+    //         await item
+    //     }catch(e){
+
+    //     }
+    // })
+    try{
+        await new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log(1);
+                resolve();
+            },1000);
+        });
+    }catch(e){
+        console.log(e);
+    }
+    try{
+        await new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log(2);
+                reject("这是第2个 Promise 出错了");
+            },1000);
+        });
+    }catch(e){
+        console.log(e);
+    }
+    try{
+        await new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                console.log(3);
+                resolve();
+            },1000);
+        });
+    }catch(e){
+        console.log(e);
+    }   
+        
+}
+fn();
+</script>    
+</body>
+</html>

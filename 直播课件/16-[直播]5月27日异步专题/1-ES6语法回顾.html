@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 箭头函数
+/*
+    (参数,参数)=>{
+        执行语句
+        return 返回值
+    }
+
+    参数=>{
+        执行语句
+        return 返回值
+    }
+
+    参数=>返回值
+*/ 
+// let fn = (n1=1,n2=2)=>{
+//     n1 = n1 + n2;
+//     return n1*n2
+// };
+let fn = (...arg)=>{
+    console.log(arg);
+    console.log(this);
+    return arg.reduce((n1,n2)=>n1+n2);
+};
+console.log(fn(1,2,3,4,5,6));
+</script>   
+</body>
+</html>

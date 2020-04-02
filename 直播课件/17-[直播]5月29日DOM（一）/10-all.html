@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(1);
+        resolve();
+    });
+})
+let p2 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(2);
+        resolve();
+    });
+})
+let p3 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        console.log(3);
+        resolve();
+    });
+})
+
+// p p2 p3 状态都为 resolve 之后，再去做一些事情
+
+let p4 = Promise.all([p,p2,p3]);
+console.dir(Promise);
+p4.then(()=>{
+    console.log("成功");
+},()=>{
+    console.log("失败");
+});
+
+/*
+ Promise.all([p,p2,p3]) 当传入的 promise 状态都为 resolve，他自身就会变成一个 resolve
+
+ 参数：
+    [Promise,Promise,Promise]
+*/
+</script>    
+</body>
+</html>

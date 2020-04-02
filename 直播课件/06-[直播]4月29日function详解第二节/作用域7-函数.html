@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <script>
+        // 作用域 - 可使用范围
+        // 作用 可使用/可调用
+        // 域 范围
+        // 变量- 全局/函数
+
+        //全局作用域-变量 任何函数或者位置都可以调用！
+        var a=12;
+
+        function add(){
+            alert(1);
+        }
+
+        function fn(){
+            var b=2;
+            add();
+        }
+
+        
+        fn()
+        // console.log(b);
+        // console.log(a);
+    </script>
+</body>
+</html>

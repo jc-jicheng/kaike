@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .wrap{
+            width: 700px;
+            height: 500px;
+            background: url(img/bg.jpg) no-repeat;
+            background-size: cover;
+            margin: 150px auto;
+            text-align: center;
+        }
+        textarea{
+            border: 2px solid #534590;
+            width: 360px;
+            height: 130px;
+            background: #fff;
+            border-radius: 8px;
+            resize: none;
+            margin-top: 118px;
+            padding: 5%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        ul{
+            list-style: none;
+        }
+        button{
+            display: block;
+            width: 100px;
+            height: 30px;
+            border: 2px solid #fff;
+            background: #14afd0;
+            font-size: 14px;
+            line-height: 30px;
+            font-family: "微软雅黑";
+            border-radius: 12px;
+            color: #fff;
+            margin-left: 430px;
+
+        }
+        #list{
+            width: 360px;
+            margin: 17px 0 0 170px;
+        }
+        #list li{
+            height: 40px;
+            margin-bottom: 12px;
+            background: #554892;
+            border-radius: 12px;
+            color: #fff;
+            padding-left: 20px;
+            box-sizing: border-box;
+            line-height: 40px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <textarea id="text"></textarea>
+        <button id="btn">提交</button>
+        <ul id="list">
+            
+        </ul>
+    </div>
+    <script>
+    //     1. 点击提交按钮 将文本输入的内容 添加到ul列表中
+    //     a. 获取元素
+    //     b. 点击提交按钮 获取文本内容
+    //     c. 生成li 把 文本内容 放到li中
+    //     d. 将生成好的li 放到 ul中
+
+    //js中区分大小写！
+    // 单双引号 都可以 用  不建议混用
+
+            var txt=document.getElementById('text');
+            var btn=document.getElementById('btn');
+            var list=document.getElementById('list');
+
+            // 给提交按钮 添加点击事件
+            btn.onclick=function(){
+                // 获取文本域内容
+                var val=txt.value;
+                // console.log(val)
+                
+                // innerHTML 元素的html文本
+                // 字符串拼接 字符串 和 变量的拼接  使用的是 + 
+                // list.innerHTML='<li>'+val+'</li>';
+
+                // list.innerHTML=list.innerHTML+'<li>'+val+'</li>';
+
+                // 当 遇到 自己 + 自己  有简写方式 “累加”
+                list.innerHTML+='<li>'+val+'</li>';
+
+            
+            }
+
+            // 要求：独立完成！
+
+    </script>
+</body>
+</html>

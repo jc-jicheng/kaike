@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    
+</body>
+<script>
+ // 工厂函数对象 无法识别是哪个工厂函数
+//  一
+// function Fa(){
+//     let obj = {}
+//     return obj;
+// }
+// // 二
+// function Fb(){
+//     let obj = {}
+//     return obj;
+// }
+
+// let fa = Fa();
+// let fb = Fb();
+// // 通过constructor识别 构造函数；
+// console.log(fa.constructor);
+// console.log(fb.constructor);
+
+
+function Fa(){
+    this.name = "张三";
+}
+function Fb(){
+    this.name = "李四"
+}
+let fa = new Fa();
+let fb = new Fb();
+console.log(fa.constructor);
+console.log(fb.constructor);
+</script>
+
+</html>

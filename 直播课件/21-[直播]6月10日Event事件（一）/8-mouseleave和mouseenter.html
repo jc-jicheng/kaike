@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 200px;
+            border: 1px solid #000;
+        }
+        #list li {
+            font: 14px/30px "宋体";
+        }
+        #list li:nth-child(2n) {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>列表1</li>
+    <li>列表2</li>
+    <li>列表3</li>
+    <li>列表4</li>
+    <li>列表5</li>
+</ul>    
+<script>
+{
+    let list = document.querySelector("#list");
+    list.addEventListener("mouseenter",function(e){
+        console.log("鼠标移入",e.target);
+    });
+    list.addEventListener("mouseleave",function(e){
+        console.log("鼠标移出",e.target);
+    });
+}
+</script>
+</body>
+</html>

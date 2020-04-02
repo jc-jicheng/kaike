@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <kkb-component-1></kkb-component-1>
+        <kkb-component-2></kkb-component-2>
+        <kkb-component-3></kkb-component-3>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+        Vue.component('kkb-component-1', {
+            template: `
+                <div>
+                    kkb-component-1
+                    <kkb-component-4></kkb-component-4>
+                </div>
+            `
+        });
+        Vue.component('kkb-component-2', {
+            template: `
+                <div>
+                    kkb-component-2
+                    <kkb-component-4></kkb-component-4>
+                </div>
+            `,
+            components: {
+                'kkb-component-4': {
+                    template: `
+                        <div>kkb-component-4</div>
+                    `
+                }
+            }
+        });
+    
+        new Vue({
+            el: '#app',
+            components: {
+                'kkb-component-3': {
+                    template: `
+                        <div>kkb-component-3</div>
+                    `
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

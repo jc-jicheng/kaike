@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="停">
+    <div></div>
+    <script>
+        var left=0;
+        var timer=null;
+        var btn=document.querySelector('input');
+        var div=document.querySelector('div');
+
+
+        timer=setInterval(function(){
+            left+=5;
+            div.style.left=left+'px';
+        },30);
+
+        btn.onclick=function(){
+            clearInterval(timer);
+        }
+       
+
+    </script>
+</body>
+</html>

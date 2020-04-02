@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击</button>
+</body>
+<script>
+
+// 自定义事件  ： 把函数当成事件来执行；
+// 方便多人协作；
+function callback1(){
+    console.log("a....");
+}
+
+function callback2(){
+    console.log("b....")
+}
+// callback();
+// callback2();
+let handle = {};
+addEvent("mycallback",callback1);
+addEvent("mycallback",callback2);
+// removeEvent("mycallback",callback1);
+trigger("mycallback")
+// document.querySelector("button").addEventListener("click",callback1)
+// document.querySelector("button").addEventListener("click",callback2)
+
+// 添加自定义事件
+function addEvent(eventName,callback){
+    if(typeof handle[eventName]==='undefined'){
+        handle[eventName] = [];
+    }
+    if(typeof callback === 'function' && !handle[eventName].includes(callback)){
+        handle[eventName].push(callback);
+    }
+}
+
+function trigger(eventName){
+    if(!eventName in handle){
+        return ;
+    }
+    handle[eventName].forEach(v=>{
+        v();
+    })
+}
+
+// 移出绑定事件
+function removeEvent(eventName,callback){
+    for(let i =0;i<handle[eventName].length;i++){
+        if(handle[eventName][i]===callback){
+            handle[eventName].splice(i,1);
+            break;
+        }
+    }
+}
+
+
+
+
+
+
+</script>
+</html>

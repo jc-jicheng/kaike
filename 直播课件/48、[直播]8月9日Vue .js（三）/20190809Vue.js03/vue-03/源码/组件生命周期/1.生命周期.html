@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        开课吧 {{1+2}}
+        <hr>
+        <button @click="n++">{{n}}</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            // template: `
+            //     <div>KaiKeBa</div>
+            // `,
+            data: {
+                n: 1
+            },
+            beforeCreate() {
+                console.log('app: beforeCreate');
+            },
+            created() {
+                console.log('app: created');
+            },
+            beforeMount() {
+                console.log('app: beforeMount');
+            },
+            mounted() {
+                console.log('app: mounted');
+            },
+
+            beforeUpdate() {
+                console.log('app: beforeUpdate');
+            },
+            updated() {
+                console.log('app: updated');
+            },
+
+            beforeDestroy() {
+                console.log('app: beforeDestroy');
+            },
+            destroyed() {
+                console.log('app: destroyed');
+            }
+        });
+
+    </script>
+</body>
+</html>

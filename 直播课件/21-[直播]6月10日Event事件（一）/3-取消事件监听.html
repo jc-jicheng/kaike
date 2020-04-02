@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #box {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            #box2 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: green;
+            }
+            #box3 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<script>
+{
+    let box = document.querySelector("#box");
+    // target.addEventListener 事件监听
+    // box.onclick = function(){
+    //     console.log("小芳的事情");
+    //     box.onclick = null;
+    // };
+    function fn(){
+        console.log("今天上课的同学好像不太多");
+        box.removeEventListener("click",fn);
+    }
+    box.addEventListener("click",fn);
+    /*
+        事件绑定:
+            target.onclick = fn
+        事件监听:
+            target.addEventListener("click",fn)  
+
+        事件监听 可以添加多个事件处理函数，每一个都会执行      
+    
+        target.removeEventListener("click",fn);
+        如果要取消事件监听，在添加事件时，就不能使用匿名函数
+    */
+}
+</script>    
+</body>
+</html>

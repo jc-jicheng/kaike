@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://cdn.bootcss.com/redux/4.0.4/redux.min.js"></script>
+    <script>
+    
+        let datas = {
+            user: {},
+            items: [],
+            cart: []
+        }
+
+        // function reducers(state, action) {
+        //     switch(action.type) {
+        //         case 'ADD_ITEM':
+        //             // return Object.assign(state, {
+        //             //     items: [...state.items, action.payload]
+        //             // });
+        //             let items = [...state.items, action.payload];
+        //             return {...state, items};
+        //             break;
+        //         case 'ADD_CART':
+        //             break;
+        //         default:
+        //             return state;
+        //     }
+        // }
+
+        // user reducer
+        function user(state = {}, action) {
+            return state;
+        }
+        // items reducer
+        function items(state = [], action) {
+            switch(action.type) {
+                case 'ADD_ITEM':
+                    return [...state, action.payload];
+                    break;
+                default:
+                    return state;
+            }
+        }
+        // cart reducer
+        function cart(state = [], action) {
+            switch(action.type) {
+                case 'ADD_CART':
+                    return [...state, action.payload];
+                    break;
+                default:
+                    return state;
+            }
+        }
+
+        let reducers = Redux.combineReducers({
+            user,
+            items,
+            cart
+        });
+
+        let store = Redux.createStore(reducers);
+
+        store.dispatch({
+            type: 'ADD_ITEM',
+            payload: {
+                id: 1,
+                name: 'item-01'
+            }
+        });
+
+        console.log(store.getState());
+
+        store.dispatch({
+            type: 'ADD_CART',
+            payload: {
+                id: 1,
+                name: 'cart-01'
+            }
+        });
+
+        console.log(store.getState());
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+function fn(){
+    var nub = 0;
+    function f(){
+        nub++;
+        console.log(nub);
+    }
+    f();// 1
+    function f2(){
+        nub++;
+        console.log(nub);
+    }
+    f2();// 2 
+    function f3(){
+        nub++;
+        console.log(nub);
+    }
+    f3();// 3
+}
+
+function fn2(){
+    var nub = 0;
+    function f(){
+        nub++;
+        console.log(nub);
+    }
+    f();
+} 
+
+
+*/  
+  
+function fn(){
+    var nub = 0;
+    return function(){
+        nub++;
+        console.log(nub);
+    }
+}    
+var f = fn(); //函数执行之后，会有返回值, f 相当于 function(){nub++; console.log(nub);}
+f(); // 1  
+f(); // 2
+f(); // 3
+fn()(); // 1 
+
+</script>   
+</body>
+</html>

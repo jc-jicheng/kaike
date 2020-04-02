@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="babel.min.js"></script>
+</head>
+<body>
+<script type="text/babel">
+// let name = "reci";
+// let gender = "小姐姐";
+// let age = 18;    
+// let str = `姓名: ${name}
+// 性别：${gender}，
+// 年龄：${age}`; 
+// console.log(str);
+let obj = {
+    a: 1,
+    b: 2
+};
+// let a = obj.a;
+// let b = obj.b;
+let {a,b} = obj;
+console.log(a,b);
+
+// let a = 1;
+// let b = 2;
+// let arr = [a,b];
+// [b,a] = arr;
+// console.log(a,b);
+
+let arr = [1,2,3];
+let arr2 = [
+    "a",
+    ...arr,
+    "b"
+];
+console.log(arr2);
+</script>    
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        function fn1() {
+            // 'use strict';
+            console.log(this);
+        }
+
+        // 直接调用：非严格模式指向window，严格模式指向undefined
+        // fn1();
+
+        // 作为对象的方法进行调用：指向调用该方法的对象
+        // let obj = {f: fn1};
+        // obj.f();
+
+        // 使用call、apply调用
+        // fn1.call(1);
+
+        // 使用bind
+        // fn1.bind(1)();
+
+        // 箭头函数
+
+        // getter、setter
+
+    </script>
+</body>
+</html>

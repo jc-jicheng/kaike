@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // return 返回
+
+        function fn(){
+            console.log(123);
+            // return [1,2,3,4];
+            // return function(){
+            //     alert(123);
+            // }
+        }
+
+        // 1. 函数在执行完毕时 会有一个结果
+        // 2. 默认 这个结果就是 undefined
+        // 3. 如果 设置了 return 那结果是return后面的值
+        // 4. 可以return任何值
+        var a=fn();  //456
+        // var a=fn;
+
+        console.log(a);
+
+    </script>
+</body>
+</html>

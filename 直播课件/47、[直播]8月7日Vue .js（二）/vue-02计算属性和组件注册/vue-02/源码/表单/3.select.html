@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        
+        <select v-model="v3">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <hr>
+        <select v-model="v5" multiple>
+            <option value="足球">足球</option>
+            <option value="音乐">音乐</option>
+        </select>
+
+        <hr>
+        <button @click="getData">按钮</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                v3: '女',
+                v5: ['足球', '音乐']
+            },
+            methods: {
+                getData() {
+                    console.log(this.v3, this.v5);
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

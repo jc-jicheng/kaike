@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin:-30px 0 0 -30px;
+            width: 60px;
+            height: 60px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>    
+<script src="mTween.js"></script>
+<script>
+{
+    let box = document.querySelector("#box");
+    css(box,"translateX",0);
+    document.addEventListener("touchstart",(e)=>{
+        e.preventDefault();
+    },{passive:false});
+    window.addEventListener("devicemotion",(e)=>{
+        var motion = e.acceleration; //加速度
+        var motion2 = e.accelerationIncludingGravity;//(重力加速度 + 加速度);
+        var x =  Math.round(motion2.x - motion.x); // 注意 IOS 下 和 安卓下取值刚好相反，ISO 下是正数时安卓下是负数
+        var tX = css(box,"translateX"); 
+        if(!getIos()){
+            x = -x;
+        }
+        css(box,"translateX",tX + x); 
+    });
+}
+function getIos(){
+    var u = window.navigator.userAgent;
+    return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+}
+</script>
+</body>
+</html> 

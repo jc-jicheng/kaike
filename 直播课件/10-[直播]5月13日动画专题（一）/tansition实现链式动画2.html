@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            /* height: 300px; */
+            margin: 100px auto;
+            background: #CCC;
+            height: 0;
+            overflow: hidden;
+            transition: 1s;
+        }
+
+        h3{
+            text-align: center;
+            font-size: 50px;
+            opacity: 0;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>这是内容</h3>
+    </div>
+    <script>
+        var div=document.querySelector('div');
+        var h3=document.querySelector('h3');
+        setTimeout(function(){
+            div.style.height='300px';
+        },1000);
+
+        // 事件 transitionend 过渡结束(触发)
+        // click / mouseover/ mouseout / 
+        // 需要用事件绑定的方式加！
+
+
+        // addEventListener(event,fn)
+        // div.addEventListener('transitionend',function(){
+        //    div.style.width='100px';
+        // })
+
+        div.addEventListener('transitionend',function(){
+           div.style.background='yellow';
+           div.addEventListener('transitionend',function(){
+            div.style.width='100px';
+           })
+        })
+
+        // onclick 
+
+        // div.onclick=
+
+        
+        
+
+
+
+    </script>
+</body>
+</html>

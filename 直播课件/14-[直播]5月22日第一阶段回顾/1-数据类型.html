@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+    数据类型有几种：
+        简单类型：null，number，string，boolean，Symbol，undefined
+        复杂类型: object
+    typeof: function，number，string，boolean，Symbol，undefined，object
+
+    传址: 赋值过程中，传递的是引用地址 (数据在内存中的地址)
+    传值: 赋值过程中，传递的就是具体数值
+
+*/
+var obj = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+var obj2 = obj;
+obj.a = 10;
+console.log(obj2.a);
+// 对象类型，如果直接从一个变量 保存到另外一个变量，传递的不是对象本身，而是地址，所以修改其中一个另外一个也会跟着变。 尽量不要把对象进行赋值传递
+</script>    
+</body>
+</html>

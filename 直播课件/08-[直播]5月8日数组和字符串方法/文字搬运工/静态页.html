@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文字搬运工</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="bg">
+        <div id="box">
+            <textarea>妙味课堂是一支充满温馨并且极富人情味的IT培训团队；2010-2011年，妙味深度关注WEB前端开发领域，为此精心研发出一套灵活而充满趣味的JavaScript课程。2011-2013年，妙味精准研发出最新HTML5\CSS3课程，并推出远程培训课程方案，尝试将线下优良的培训模式移植到远程网络培训中，希望尽最大努力，将一种快乐愉悦的授课体验、结合HTML\CSS\JS知识点，精准传递给妙味课堂的每一位学员。</textarea>
+            <div>
+                <a href="javascript:;"></a>
+                <span>0/0</span>
+                <ul>
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+
+            <p></p>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+    //当需要重复做一件事的时候：
+    //当你需要让用户看到过程的时候，就用定时器
+    //反之 就用for 
+
+            // 1. 添加点击事件给 按钮
+            // 2. 将文本域中的文本，从左到右的顺序挪到p标签之内
+            // 3. 记录挪动数字
+            // 4. 显示进度条
+
+            var txt=document.querySelector('textarea');
+            var btn=document.querySelector('a');
+            var span=document.querySelector('span');
+            var ul=document.querySelector('ul');
+            var lis=ul.querySelectorAll('li');
+            var p=document.querySelector('p');
+
+            btn.onclick=function(){
+                // 获取文本域中的内容
+                // 一个字一个字的
+                var str=txt.value.charAt(0);
+                // console.log(str);
+                p.innerHTML+=str;
+
+                // substring 
+                // 删除左侧第一个字符
+                txt.value=txt.value.substring(1);
+            }
+
+    </script>
+</body>
+
+</html>

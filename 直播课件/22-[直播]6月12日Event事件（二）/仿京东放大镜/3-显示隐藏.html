@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Document</title>
+<link rel="stylesheet" href="index.css" />
+</head>
+<body>
+<div id="box">
+    <div id="left">
+        <img src="images/img.png" id="imgs1" />
+        <div id="mask"></div>
+    </div>
+    <div id="right">
+    <div id="border">
+        <img src="images/img.png" id="img2" />
+    </div>
+    </div>
+</div>
+<script>
+{
+    let leftBox = document.querySelector("#left");
+    let rightBox = document.querySelector("#right");
+    let img1 = document.querySelector("#imgs1");
+    let img2 = document.querySelector("#img2");
+    let mask = document.querySelector("#mask");
+
+    // 获取放大比例 (有坑)
+    // 元素display:none 可视宽度就没有办法获取了
+    rightBox.style.display = "block";
+    let scaleX = img1.offsetWidth/img2.offsetWidth;
+    let scaleY = img1.offsetHeight/img2.offsetHeight;
+    rightBox.style.display = "none";
+    leftBox.addEventListener("mouseenter",function(){
+        rightBox.style.display = "block";
+        mask.style.display = "block";
+    })
+
+    
+}    
+</script>
+</body>
+</html>

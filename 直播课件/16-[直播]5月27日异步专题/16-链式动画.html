@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+{
+    // left  200
+    let box = document.querySelector("#box");
+    box.onclick = function(){
+        startMove(this,"left",200)
+        .then((info)=>{
+            // 返回 startMove 返回的 Promise，替换掉 then 的返回值 
+            return startMove(this,"top",200);
+        })
+        .then((info)=>{
+            return startMove(this,"left",0);
+        })
+        .then(()=>{
+            return startMove(this,"top",0);
+        })
+    };
+
+    function startMove(el,attr,target){
+        let now = parseFloat(getComputedStyle(el)[attr]);
+        let dir = (target - now)/Math.abs(target - now); //正值 从大到小，负值从小到大
+        let speed = dir * 5;
+        return new Promise((resolve,reject)=>{
+            requestAnimationFrame(move);
+            function move(){
+                let now = parseFloat(getComputedStyle(el)[attr]);
+                if(now == target){
+                    resolve("动画执行完了");
+                } else {
+                    now += speed;
+                    el.style[attr] = now + "px";
+                    requestAnimationFrame(move); 
+                }
+            }
+        })
+    }
+}
+</script>    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    
+</body>
+<script>
+    // new运算符：1.执行函数；2.创建一个空对象；
+    // 3.把空对象和this绑定；4.隐式返还 this；
+    
+    // function tab(){
+    //     console.log("tab....");
+    // }
+    // new tab;
+    // 构造函数 ：constructor；
+    function Tab(){
+        // 加原料
+        // let obj = {}
+        // 加工原料
+        this.psFor = function(){
+            console.log("psFor...111");
+        }
+        this.num = 4;
+        // 出厂
+        // return obj;
+        // return {
+        //     name:"张三",
+        //     age:20
+        // }
+    }
+
+   let tab1 =  new Tab();
+//    tab1.psFor();
+//  console.log(tab1.name)
+
+
+    
+
+</script>
+
+</html>

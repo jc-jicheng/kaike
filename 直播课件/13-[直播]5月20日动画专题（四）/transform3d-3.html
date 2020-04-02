@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+
+        /* 
+        
+            需要2步实现立体
+
+            1. 将盒子转成3d盒子渲染 
+                transform-style: preserve-3d;
+            2. 给父级元素添加一个景深值 ：你的视角距离这个物体的距离
+                perspective: 800px;
+         */
+         section{
+             perspective: 500px;
+         }
+        div{
+            transform-style: preserve-3d;
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin: 100px auto;
+            transition: 1s;
+        }
+
+        div:hover{
+            transform:translateZ(-100px);
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div></div>
+    </section>
+</body>
+</html>

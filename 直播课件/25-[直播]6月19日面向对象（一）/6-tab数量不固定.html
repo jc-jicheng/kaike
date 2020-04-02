@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="mydiv1">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+    </div>
+    <div class="mydiv2">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <button>按钮四</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+        <p style="display: none">内容三</p>
+        <p style="display: none">内容四</p>
+    </div>
+    <button class="nextTab">点击我第一个选项卡下一页切换</button>
+    <button class="autoPlay">点击我第二个选项卡轮播</button>
+</body>
+<script>
+    // 把共性问题 放在公共位置
+    // 特性问题 返还出去；
+    // 第一个选项卡 是2个
+    // 第二个选项卡 是4个
+
+    function Tab(btns, ps) {
+        btns.forEach((v, k) => {
+            btns[k].onclick = function () {
+                psFor(k);
+            }
+        })
+        // if (isNext) {
+        //     let num = 0;
+        //     document.querySelector(".nextTab").onclick = function () {
+        //         num++;
+        //         num = num > 2 ? 0 : num;
+        //         psFor(num);
+        //     }
+        // }
+
+        // if(isAutoPlay){
+        //     let num2 = 0;
+        //     document.querySelector(".autoPlay").onclick = function(){
+        //         setInterval(function(){
+        //         num2++;
+        //         num2 = num2 > 2 ? 0 : num2;
+        //         psFor(num2);
+        //     },1000)
+        //     }
+        // }
+
+        function psFor(k) {
+            ps.forEach((value, key) => {
+                if (key === k) {
+                    btns[key].style.background = "red";
+                    ps[key].style.display = "block";
+                } else {
+                    btns[key].style.background = "";
+                    ps[key].style.display = "none";
+                }
+            })
+        }
+        return {
+            psFor,
+            num:btns.length-1
+        };
+    }
+    let btns = document.querySelectorAll(".mydiv1 button");
+    let ps = document.querySelectorAll(".mydiv1 p");
+    let tab1 = Tab(btns, ps);
+    let num = 0;
+    document.querySelector(".nextTab").onclick = function () {
+        num++;
+        num = num > tab1.num ? 0 : num;
+        tab1.psFor(num);
+    }
+
+    let btns2 = document.querySelectorAll(".mydiv2 button");
+    let ps2 = document.querySelectorAll(".mydiv2 p");
+    let tab2 = Tab(btns2, ps2);
+    let num2 = 0;
+    document.querySelector(".autoPlay").onclick = function () {
+        setInterval(function () {
+            num2++;
+            num2 = num2 > tab2.num ? 0 : num2;
+            tab2.psFor(num2);
+        }, 1000)
+    }
+
+</script>
+
+</html>

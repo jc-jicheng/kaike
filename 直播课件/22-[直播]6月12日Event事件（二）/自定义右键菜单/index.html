@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义右键</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url(./imgs/bg.png) no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+        }
+
+        #list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 180px;
+            height: 200px;
+            position: fixed;
+            background-color: #fff;
+            display: none;
+        }
+
+        #logo {
+            width: 200px;
+            height: 48px;
+            background: url(./imgs/logo.png) no-repeat;
+            margin: 50px auto;
+            position: absolute;
+            left: 50%;
+            margin-left: -100px;
+            top: 50px;
+        }
+
+        #list li {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-indent: 56px;
+            color: #f5726c;
+        }
+
+        #list li:nth-child(1) {
+            background: url(./imgs/download.png) no-repeat 20px 16px;
+        }
+
+        #list li:nth-child(2) {
+            background: url(./imgs/remove-icon.png) no-repeat 20px 16px;
+        }
+
+        #list li:nth-child(3) {
+            background: url(./imgs/move-icon.png) no-repeat 20px 15px;
+        }
+
+        #list li:nth-child(4) {
+            background: url(./imgs/rename-icon.png) no-repeat 20px 14px;
+        }
+
+        #list li:hover {
+            background-color: #fde9e9;
+            color: #e6423c;
+        }
+    </style>
+</head>
+
+<body>
+<div id="logo"></div>
+<ul id="list">
+    <li>下载</li>
+    <li>删除</li>
+    <li>移动到</li>
+    <li>重命名</li>
+</ul>
+<script>
+{
+    let list = document.querySelector("#list");
+    document.addEventListener("contextmenu",function(e){
+        e.preventDefault();
+        //console.log(list.offsetWidth,list.offsetHeight); 如果元素本身display none 那么就获取不到 可视宽高
+        list.style.display = "block";
+        let l =  Math.min(e.clientX,document.documentElement.clientWidth - list.offsetWidth);
+        let t =  Math.min(e.clientY,document.documentElement.clientHeight - list.offsetHeight);
+       
+        /*范围限制*/
+        // let maxLeft = document.documentElement.clientWidth - list.offsetWidth;
+        // if(l > maxLeft){
+        //     l = maxLeft;
+        // }
+        // let maxTop = document.documentElement.clientHeight - list.offsetHeight;
+        // if(t > maxTop){
+        //     t = maxTop;
+        // }
+
+
+        list.style.left = l + "px";
+        list.style.top = t + "px";
+        //let rect = list.getBoundingClientRect();
+        //console.log(rect.right);// 如果 菜单距离右侧距离可视区的左侧的距离 > 可视区的宽度，说明出去了
+        // 用可视区宽度 - 菜单宽度 求出 菜单left的最大值，如果 当前left 值 > 最大值，说明超出
+       
+    });
+    document.addEventListener("mousedown",function(){
+        list.style.display = "none";
+       // console.log(1);
+    });
+}    
+</script>
+</body>
+
+</html>

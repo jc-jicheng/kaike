@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // requestAnimationFrame(fn)
+        // 不需要传递间隔时间
+        // 相当于setTimeout 一次性的
+        // 如果想连续执行 - 
+
+        var div=document.querySelector('div');
+        var l=0;
+        var timer=null;
+
+        function run(){
+            l+=5;
+            div.style.left=l+'px';
+            requestAnimationFrame(run);
+        }
+
+        div.onclick=function(){
+            // 相当于定时器
+           requestAnimationFrame(run)
+        }
+
+
+    </script>
+</body>
+</html>

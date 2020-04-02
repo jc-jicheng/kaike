@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="box">
+    <div id="div1"></div>
+</div>
+<div id="box2">
+    <div id="div2"></div>
+</div>    
+<script>
+{
+    let box = document.querySelector("#box");
+    let newDiv = document.createElement("div");
+    box.appendChild(newDiv);
+
+    // appendChild 已存在节点: 先把节点从原来的位置删除，然后添加新位置去
+    let div2 = document.querySelector("#div2");
+    box.appendChild(div2);
+}
+</script>
+</body>
+</html>

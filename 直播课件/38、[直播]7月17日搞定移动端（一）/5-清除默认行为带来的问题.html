@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://www.baidu.com">百度</a>
+    <br />
+    <input type="text" />
+    <ul id="list"></ul>
+<script>
+{
+    let list = document.querySelector("#list");
+    list.innerHTML = [...(".".repeat(100))].map((item,index)=>{
+        return `<li>这是第${index}个li</li>`;
+    }).join("");
+    list.addEventListener("click",()=>{
+        alert("111");
+    })
+}
+// 在 start 中阻止默认事件
+/*
+    1. 不能进行滑动
+    2. 不能进行双指缩放
+    3. 不能触发菜单
+    4. 不能 输入类型表单控件不能输入
+    5. 不能长按选中文字，及显示菜单
+    6. 阻止所有的鼠标事件执行(包括a标签的默认跳转)
+*/
+// {
+//     document.addEventListener("touchstart",(e)=>{
+//         e.preventDefault();
+//     },{
+//         passive: false
+//     })
+// }
+</script>          
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #box {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            #box2 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: green;
+            }
+            #box3 {
+                position: absolute;
+                left: 200px;
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+            p {
+                margin: 0;
+            }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<div id="div4">
+    <p>p标签</p>
+</div>
+<script>
+{
+    let box = document.querySelector("#box");
+    let box2 = document.querySelector("#box2");
+    let box3 = document.querySelector("#box3");
+    window.addEventListener("click",function(){
+        console.log(window,"冒泡");
+    })
+    box.addEventListener("click",function(){
+        console.log(1,"冒泡");
+    });
+    box2.addEventListener("click",function(e){
+        console.log(2,"冒泡");
+        //e.stopPropagation();// 阻止冒泡
+        e.cancelBubble = true;// 阻止冒泡 低版本兼容
+    });
+    box3.addEventListener("click",function(){
+        console.log(3,"冒泡");
+    });
+}
+</script>    
+</body>
+</html>

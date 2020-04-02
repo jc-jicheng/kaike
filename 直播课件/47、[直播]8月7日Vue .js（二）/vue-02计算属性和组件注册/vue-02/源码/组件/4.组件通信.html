@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>父组件：{{quantity}}</p>
+        <kkb-child :quantity="initQuantity" @increment="appIncrement"></kkb-child>
+        <kkb-child :quantity="initQuantity" @increment="appIncrement"></kkb-child>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const child = {
+            props: ['quantity'],
+            data() {
+                return {
+                    n: this.quantity
+                };
+            },
+            template: `
+                <div>
+                    <p>子组件：{{n}}</p>
+                    <button @click="increment">按钮</button>
+                </div>
+            `,
+            methods: {
+                increment() {
+                    this.n++;
+                    // 事件
+                    this.$emit('increment', this.n);
+                }
+            }
+        };
+
+        new Vue({
+            el: '#app',
+            data: {
+                quantity: 0,
+                initQuantity: 0
+            },
+            components: {
+                'kkb-child': child
+            },
+            methods: {
+                appIncrement(v) {
+                    // console.log(v);
+                    this.quantity++;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #list li {
+            list-style: none;
+            font: 14px/40px "宋体";
+            border-bottom: 1px solid #000;
+        }
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height:  100px;
+            background: red;
+            transition: .5s;
+        }
+    </style>
+</head>
+<body>
+<!--
+     函数防抖[debounce]: 
+        希望函数只执行一次，哪怕我进行了多次调用，也只执行最后一次
+-->  
+<div id="box"></div>  
+<ul id="list">
+
+</ul>
+<script>
+{
+    let list = document.querySelector("#list");
+    list.innerHTML = [...(".".repeat(100))].map((item,index)=>{
+        return `<li>函数防抖_${index}</li>`;
+    }).join("");
+}
+// 当我们拖动滚动条，拖动停止时，#box 滑入
+{
+    let box = document.querySelector("#box");
+    let timer = 0;
+    // scroll 时间是实时触发的
+    console.log(debounce(fn));
+    window.addEventListener("scroll",debounce(fn));
+    function fn(e){
+        // console.log(1);
+        // console.log(e,this);
+        let t = window.scrollY;
+        box.style.top = t + "px";
+    }
+}
+// debounce 防抖函数
+function debounce(fn,delay=200){
+    var timer;
+    return function(...arg){ // 实际调用的是 这个 function
+        clearTimeout(timer);
+        var _this = this;
+        timer = setTimeout(function(){
+            fn.call(_this,...arg);
+        },delay);
+    }
+}    
+</script>
+</body>
+</html>

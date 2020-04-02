@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+} 
+img {
+    vertical-align: top;
+}
+/* body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+} */
+#wrap {
+    margin: 40px auto;
+    position: relative;
+    width: 600px;
+    height: 400px;
+    border: 2px solid #000;
+    overflow: hidden;
+}    
+#pics {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    height: 400px;
+    z-index: 1;
+}
+#pics li{
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+}
+#pics img {
+    width: 600px;
+    height: 400px;
+}
+.btn {
+    position: absolute;
+    top: 170px;
+    z-index: 2;
+    width: 60px;
+    font: 40px/60px "宋体";
+    text-align: center;
+    background: rgba(255, 255, 255, .6);
+    text-decoration: none;
+    color: #000;
+}
+.btn:hover {
+    background: #fff;
+}
+.prev {
+    left: 0;
+}
+.next {
+    right: 0;
+}
+#navs {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+}
+#navs a {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+}
+#navs .active {
+    background: #f60;
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+    <ul id="pics">
+        <li>
+            <img src="img2/img (1).jpg" />
+        </li>
+        <li>
+            <img src="img2/img (2).jpg" />
+        </li>
+        <li>
+            <img src="img2/img (3).jpg" />
+        </li>
+        <li>
+            <img src="img2/img (4).jpg" />
+        </li>
+        <li>
+            <img src="img2/img (5).jpg" />
+        </li>
+        <li>
+            <img src="img2/img (1).jpg" />
+        </li>
+    </ul>
+    <a href="javascript:;" class="btn prev"><</a>
+    <a href="javascript:;" class="btn next">></a>
+    <nav id="navs">
+        <a class="active"></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+    </nav>
+</div>
+<script src="../mTween.js"></script>
+<script>
+    // 1. 给左右按钮添加点击事件
+    var next=document.querySelector('.next');
+    var prev=document.querySelector('.prev');
+    var ul=document.querySelector('#pics');
+    var lis=ul.querySelectorAll('li');
+    var nav=document.querySelector('#navs');
+    var navAs=nav.querySelectorAll('a');
+    var iNow=0;
+
+    next.addEventListener('click',function(){
+        // ul.style.left='-600px';
+        if(iNow==lis.length-1){
+            // alert('最后一张了');
+            css(ul,'left',0)
+            iNow=0;
+        }
+        iNow++;
+
+
+        //操作下方状态列表
+        for(var i=0;i<navAs.length;i++){
+            navAs[i].className='';
+        }
+        // [0,1,2,3,4]  5 -> 0 
+        navAs[iNow%navAs.length].className='active';
+
+        move({
+            el:ul,
+            attrs:{
+                left:-600*iNow
+            },
+            time:500
+        })
+    })
+
+
+    prev.addEventListener('click',function(){
+        // ul.style.left='-600px';
+        if(iNow==0){
+            // alert('第一张');
+            iNow=lis.length-1;
+            css(ul,'left',iNow*-600)  
+        }
+        iNow--;
+        //操作下方状态列表
+        for(var i=0;i<navAs.length;i++){
+            navAs[i].className='';
+        }
+        // [0,1,2,3,4]  5 -> 0 
+        navAs[iNow%navAs.length].className='active';
+        move({
+            el:ul,
+            attrs:{
+                left:-600*iNow
+            },
+            time:500
+        })
+    })
+</script>
+</body>
+</html>

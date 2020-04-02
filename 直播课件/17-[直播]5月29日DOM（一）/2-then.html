@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve,reject)=>{
+    // 写异步的处理
+    setTimeout(()=>{
+        //console.log(1);
+        resolve("a");
+    },100);   
+});
+// 异步完成之后，执行回调
+p.then((info)=>{
+    console.log("resolve",info);
+},()=>{
+    console.log("reject");
+}).then(()=>{
+    // 直接返回一个状态 为 resolved 的Promise
+    console.log(1);
+}).then(()=>{
+    console.log(2);
+}).then(()=>{
+    console.log(3);
+});
+
+/*
+    then 返回值 是一个新的 promise
+          新的 promise：
+                1. then 的回调中 没有返回值,   promise 状态就是一个 resolved
+                2. then 的回调中有返回值，但是返回值不是一个 promise 对象
+*/
+</script>    
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <a href="http://www.baidu.com">跳转</a> 
+        <input type="text" />   
+<script>
+// contextmenu 右键菜单事件 监听右键菜单是否被触发
+// 默认行为(默认事件): 不是我们自己设定，而是 JS 本身就有的一些行为：如 a 标签的调整，点击右键弹出菜单，文字选中，滚动条滚动，文本框输入…… 
+{
+    window.addEventListener("contextmenu",function(){
+        console.log(1);
+    });
+}
+</script>    
+</body>
+</html>

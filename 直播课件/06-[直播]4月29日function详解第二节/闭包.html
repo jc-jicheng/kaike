@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 闭包 - > 一个函数内嵌套一个子函数，子函数可以访问父函数的局部作用域
+        // -> 一个函数调用另一个函数的局部变量
+
+        function fn(){
+            var a=1;
+            function fn2(){
+                a++;
+                console.log(a);
+            }
+            fn2()
+        }
+        fn()
+
+
+
+
+    </script>
+</body>
+</html>

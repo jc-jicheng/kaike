@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="axios.js" type="text/javascript"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn1">点击我发送ajax get请求</button>
+    <button class="btn2">点击我发送ajax post请求</button>
+</body>
+<script>
+ let btn1 = document.querySelector(".btn1");
+ let btn2 = document.querySelector(".btn2");
+ //  拦截器； 权限认证  凭证验证；jwt
+ axios.interceptors.request.use(function (config) {
+     console.log("request interceptors11");
+    return config;
+ })
+ axios.interceptors.request.use(function (config) {
+     console.log("request interceptors222");
+    return config;
+ })
+ axios.interceptors.response.use(function (config) {
+     console.log("response interceptors");
+    return config;
+ })
+
+ btn1.onclick = function(){
+    axios({
+        url:"/axios?height=178cm",
+        method: "get",
+        params:{
+            name:"王五",
+            age:10
+        }
+    }).then(res=>{
+        console.log(res);
+    })
+ }
+ btn2.onclick = function(){
+    axios({
+        url:"/axiosPost",
+        method: "post",
+        data:{
+            name:"王五",
+            age:10
+        },
+        headers:{
+            "content-type":"application/json",
+            "x-custom-headers":"value"
+        },
+        transformResponse:[function(data){
+            console.log("res:",data);
+            return JSON.parse(data);
+        }],
+        transformRequest:[function(data){
+            console.log("req:",data);
+            return data;
+        }]
+    }).then(res=>{
+        console.log(res);
+    })
+
+    // axios.post("/axiosPost",{
+    //         name:"王五",
+    //         age:10
+    // },{
+    //     headers:{
+    //         "content-type":"application/json",
+    //         "x-custom-headers":"value"
+    //     } 
+    // }).then(res=>{
+    //     console.log(res);
+    // })
+
+ }
+</script>
+</html>

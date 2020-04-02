@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<script>
+/*
+    拖拽画框：
+        拖拽: 计算鼠标移动距离
+*/
+{
+    let mouseStart = {};
+    let box = null;
+    // 找到新的鼠标位置,计算鼠标移动距离
+    let move = (e)=>{
+        let mouseNow = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        let dis = {
+            x: mouseNow.x - mouseStart.x,
+            y: mouseNow.y - mouseStart.y
+        };
+        console.log(dis);
+        // box.style.width = dis.x + "px";
+        // box.style.height = dis.y + "px";
+    };
+    // 鼠标按下记录鼠标的坐标
+    document.addEventListener("mousedown",function(e){
+        mouseStart = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        box = document.createElement("div");
+        box.classList.add("box");
+        document.body.appendChild(box);
+        document.addEventListener("mousemove",move);
+        document.addEventListener("mouseup",()=>{
+            document.removeEventListener("mousemove",move);
+        },{once:true});
+    });
+}
+</script>   
+</body>
+</html>

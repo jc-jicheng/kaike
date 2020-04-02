@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+        // let obj1 = {};
+
+        // console.dir(obj1);
+
+
+        // function fn1() {}
+
+        // console.dir(fn1);
+
+
+
+        function F() {
+            // this.__proto__ = F.prototype;
+            this.a = 1;
+        }
+        // F.prototype = {};
+        F.prototype.b = 10;
+        Object.prototype.c = 100;
+
+        let f = new F();
+
+        // console.log(f.__proto__ === F.prototype);
+
+        // f.a
+        console.log(f.a);
+        
+        // f.b => f.__proto__.b === F.prototype.b
+        console.log(f.b);
+
+        // f.c => f.__proto__.c === F.prototype.c  !== F.prototype.__proto__.c === Object.prototype.c
+        // console.log(f.c);
+
+        // f.c => f.__proto__.d === F.prototype.d  !== F.prototype.__proto__.d === Object.prototype.d
+        // Object.prototype.__proto__ == null
+        console.log(f.d);
+
+    </script>
+</body>
+</html>

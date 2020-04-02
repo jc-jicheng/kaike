@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        
+        <input type="radio" v-model="v3" value="男" /> 男
+        <input type="radio" v-model="v3"  value="女" /> 女
+
+        <hr>
+
+        <input type="checkbox" v-model="v4" /> 同意
+
+        <hr>
+
+        <input type="checkbox" v-model="v5" value="足球" /> 足球
+        <input type="checkbox" v-model="v5" value="音乐" /> 音乐
+
+        <hr>
+        <button @click="getData">按钮</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                v3: '男',
+                v4: true,
+                v5: ['足球', '音乐']
+            },
+            methods: {
+                getData() {
+                    
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

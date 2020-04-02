@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // function fn(a) {
+    //     console.log(a);  
+    //     var a = 2; 
+    //     function a() { } 
+    //     console.log(a); 
+    // }
+    // fn(1);
+
+    // var f = true;
+    // if (f === true) {
+    //     var a = 10;
+    // }
+    // function fn() {
+    //     var b = 20;
+    //      c = 30;
+    // }
+    // fn();
+    // console.log(a);  
+    // console.log(b); 
+    // console.log(c);
+
+    // var a = 10;
+    // a.pro = 10;
+    // console.log(a.pro + a);
+    // var s = 'hello'; 
+    // s.pro = 'world';
+    // console.log(s.pro + s);
+    // (function () {
+    //     var a = b = 5;
+    // })();
+    // console.log(b);
+    var a = 10,b = 20,c = 10;
+     alert(a=b);
+     alert(a==b);
+     alert(a==c);
+
+
+
+
+
+    // var length = 10;
+    // function fn() {
+    //     console.log(this.length);
+    // }
+    // var obj = {
+    //     length: 5,
+    //     method: function (fn) {
+    //         fn();
+    //         arguments[0]();
+    //     }
+    // };
+    // obj.method(fn,1,2);
+
+
+
+    // var User = {
+    //     count: 1,
+    //     getCount: function () {
+    //         return this.count;
+    //     }
+    // };
+    // console.log(User.getCount()); //what?
+    // var func = User.getCount; 
+    // console.log(func()); // what?
+
+
+
+    // var a = new Object(); 
+    // a.value = 1;
+    // b = a;
+    // b.value = 2;
+    // alert(a.value);
+    // undefined
+    // var a = 1;
+    // function b() {
+    //     return c;
+    // }
+    // b()();
+    // var a = 2;
+    // function c() {
+    //     console.log(a);
+    // }
+
+
+
+
+
+    // var obj = {
+    //         a: 1,
+    //         b: function () {
+    //             console.log(this.a)
+    //         }
+    //     };
+    // var a = 2;
+    // var objb = obj.b;
+    // obj.b();  //1
+    // objb();   // 2
+    // obj.b.call(window);  //2
+
+    // function A(){}
+    // console.log(new A());
+    // function A() { }
+    // function B(a) {
+    //     this.a = a;
+    // }
+    // function C(a) {
+    //     if (a) {
+    //         this.a = a;
+    //     }
+    // }
+    // A.prototype.a = 1;
+    // B.prototype.a = 1;
+    // C.prototype.a = 1;
+    // console.log(new A());
+    // console.log(new B());
+    // console.log(new C(2));
+
+
+
+
+    // alert(4||3);
+//     let arr = [{
+//         id:1
+//     },{
+//         id:1
+//     },{
+//         id:2
+//     }];
+//    let newArr =  arr.filter(v=>v.id==1);
+//    console.log(newArr);
+
+
+
+
+    // arr.sort(function(n1,n2){
+    //     return n1.index-n2.index;
+    // })
+    // console.log(arr);
+
+    //     function fn1 () {
+    //         return new Promise((resolve, reject) => {
+    //             setTimeout(() => {
+    //                 console.log(1111);
+    //                 resolve("我是fn1");
+    //             }, 1000);
+    //         })
+    //     }
+    //     // fn1();
+    // //     await fn1();
+
+    //     let fn2 =  function () {
+    //         return new Promise((resolve, reject) => {
+    //             setTimeout(() => {
+    //                 console.log(2222);
+    //                 resolve("我是fn2222");
+    //             }, 2000);
+    //         })
+    //     }
+
+    // class Test {
+    //     fn() {
+    //         return new Promise((resolve, reject) => {
+    //             setTimeout(() => {
+    //                 console.log(1111);
+    //                 resolve("我是fn1");
+    //             }, 1000);
+    //         })
+    //     }
+    // }
+
+
+    // let t1 = new Test();
+    // let t2 = new Test();
+
+    // async function queue(arr) {
+    //         // let res = []
+    //         for (let fn of arr) {
+    //             var data = await fn();
+    //             // res.push(data);
+    //         }
+    //         // return await res
+    // }
+    // queue([t1.fn,t2.fn]);
+
+    // let arr = [t1.fn, t2.fn];
+    // arr.forEach(async fn => {
+    //     //    console.log(fn);
+    //     await fn();
+    // })
+
+
+    // let arr = [fn1,fn2];
+    // //  function queue(arr){
+    //     arr.forEach(async fn=>{
+    //     //    console.log(fn);
+    //         await fn();
+    //     })
+    // }
+    // queue(arr);
+    // async function queue(fn1){
+    //    await fn1();
+    // }
+    // queue(fn1);
+
+
+//     async function fn1(){
+//        await setTimeout(() => {
+//             console.log(1111);
+//         }, 1000);
+//        await setTimeout(()=>{
+//             console.log(2222)
+//        },2000)
+//     }
+//    fn1();
+    // console.log(res);
+    // console.log(333)
+    // async function queue(arr){
+    //     let res = [];
+    //     for(let fn in arr){
+
+    //     }
+    // }
+
+
+
+    // function addAB(a, b) {
+    //     return a + b
+    // }
+    // function getResult() {
+    //     async function queue(arr) {
+    //         let res = []
+    //         for (let fn of arr) {
+    //             var data = await fn();
+    //             res.push(data);
+    //         }
+    //         return await res
+    //     }
+
+    //     queue([fn1, fn2])
+    //         .then(data => {
+    //             return addAB(data[0], data[1])
+    //         }).then(data => console.log(data))
+
+    // }
+
+    // getResult();
+
+//  Promise.resolve().then(function(){
+//         return  fn1() 
+// }).then(res=>{
+//     console.log(res);
+// })
+//  console.log(Promise.resolve());
+//  Promise.resolve().then(()=>{
+//      return fn1();
+//  });
+
+// fn1().then((res)=>{
+//     console.log(res);
+//     return fn2();
+// }).then((res)=>{
+//     console.log(res);
+// })
+
+</script>
+
+</html>

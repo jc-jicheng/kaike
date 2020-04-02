@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="mydiv1">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+    </div>
+    <div class="mydiv2">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <button>按钮四</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+        <p style="display: none">内容三</p>
+        <p style="display: none">内容四</p>
+    </div>
+    <button class="nextTab">点击我第一个选项卡下一页切换</button>
+    <button class="autoPlay">点击我第二个选项卡轮播</button>
+</body>
+<script>
+    // 工厂模式
+    function Tab(){
+        // 加原料
+        let obj = {}
+        // 加工原料
+        obj.psFor = function(){
+            console.log("psFor...");
+        }
+        obj.num = 4;
+        // 出厂
+        return obj;
+    }
+
+    let tab1 = Tab();
+    let tab2 = Tab();
+</script>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        // 现在你能获取的到一个元素 all 所有、全部
+        // 获取了一组div
+        
+        // 类数组
+        var divs=document.querySelectorAll('div');
+
+        // 获取元素的长度/个数
+        // console.log(divs.length);
+
+        // console.log(divs[1]);
+
+        // 不能直接给一组元素加事件！
+        // divs.onclick=function(){
+        //     divs.style.background='yellow';
+        // }
+
+        // for 循环 用来重复不断的做一件事情！
+
+        // for(初始值;循环条件;自增条件){
+        //      执行语句
+        // }
+
+        //i++  i=i+1; 
+
+
+        // for循环 在页面加载时执行！
+        for(var i=0;i<divs.length;i++){
+            // 执行了 三次
+            // alert(i);
+
+
+            console.log(i);
+
+            // this 就是当前调用事件的元素！
+            divs[i].onclick=function(){
+                console.log('点击事件内的i='+i);
+
+                // 自己！ 自己！ 这个！ 这个 this
+                this.style.background='yellow';
+            }
+        }
+
+        // i =2 for才能结束循环
+
+
+
+    </script>
+</body>
+</html>

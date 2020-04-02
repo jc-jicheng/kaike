@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!-- history 路由 -->
+<a href="/">首页</a>
+<a href="/about">关于我们</a>
+<a href="/join">加入我们</a>
+<script>
+{
+    let a = document.querySelectorAll("a");
+    a.forEach((item,index)=>{
+        item.onclick = function(){
+            history.pushState({
+                info: `这是第${index}个切换的`,
+            },"",this.href); 
+            matching();
+            // 服务器环境下  pushState 只是修改历史记录并且修改href 并不真正跳转页面
+            /*
+                state: {}
+                title: "",
+                url:{}
+            */
+            return false;//去掉a标签默认的跳转
+        };
+    });
+    function matching(){
+        let path = location.pathname;
+        console.log(history.state);
+    }
+    // 当历史记录是通过上一步下一步来切换的时候，就会触发 popstate 事件
+    window.onpopstate = function(){
+        matching();
+    };
+}
+</script>  
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <label><input type="radio" v-model="gender" value="" /> 所有</label>
+        <label><input type="radio" v-model="gender" value="男" /> 男</label>
+        <label><input type="radio" v-model="gender" value="女" /> 女</label>
+        <hr>
+        <ul>
+            <li v-for="user of showUsers">
+                {{user.username}}
+            </li>
+        </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                gender: '',
+                users: [
+                    {id: 1, username: 'baogege', gender: '男'},
+                    {id: 2, username: 'mt', gender: '男'},
+                    {id: 3, username: 'haigege', gender: '男'},
+                    {id: 4, username: 'zMouse', gender: '男'},
+                    {id: 5, username: 'reci', gender: '女'},
+                    {id: 6, username: 'lisi', gender: '女'}
+                ]
+            },
+            computed: {
+                // 计算属性,这里的函数并不是给我们直接调用的，而是作为属性的get，set方法存在
+                showUsers() {
+                    if (this.gender === '') {
+                        return this.users;
+                    } else {
+                        return this.users.filter(user=>user.gender === this.gender);
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

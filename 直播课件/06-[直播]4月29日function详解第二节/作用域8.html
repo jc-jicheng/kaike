@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       
+
+        var b; //undefined
+
+        console.log(b);
+
+        b=123;
+
+
+        // 预解析 
+        function fn(a){
+            var a;//undefind
+            // function a(){};
+            console.log(a);
+            a=5;
+            console.log(a)
+        };
+        fn(123)
+
+        // 提示： 不建议将局部变量名称和形参名称相重复
+    </script>
+</body>
+</html>

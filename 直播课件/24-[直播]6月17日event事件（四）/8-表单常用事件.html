@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="https://www.baidu.com/s">    
+    <input type="text" name="wd" id="search" value="请输入搜索内容" />
+    <input type="submit" />
+</form>
+<script>
+// onchange
+    var form = document.getElementsByTagName("form")[0];
+    var search = document.getElementById("search");
+    // search.onchange = function(){
+    //     console.log(this.value);
+    // };
+    // input 的value 改变了
+    search.oninput = function(){
+        console.log(this.value);
+    };
+
+    // 当获得焦点的时候
+    search.onfocus = function(){
+        this.select();//选中 input 的所有 value
+        setTimeout(()=>{
+            this.blur();//失去焦点
+        },500);
+    };
+
+    // 当失去焦点时候
+    search.onblur = function(){
+        if(!this.value.trim()){
+            this.value = "请输入搜索内容";
+        }
+    };
+
+    // 监听表单提交
+    form.onsubmit = function(e){
+        if(search.value == "请输入搜索内容" ){
+            search.focus();//使元素获得焦点
+            return false;
+        }
+    };
+    setTimeout(()=>{
+        form.submit();//提交表单
+    },5000);
+    
+</script>    
+</body>
+</html>

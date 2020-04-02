@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+
+        <!-- <img src="1.jpg" alt="" v-lazy> -->
+
+        <h1>{{content|toUpperCase|slice(3)}}</h1>
+        <!-- {{ slice(toUpperCase(content), 3) }} -->
+        <!-- <h1 v-text="slice(toUpperCase(content), 3)">{{content}}</h1> -->
+
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                content: 'kaikeba'
+            },
+            filters: {
+                toUpperCase: function(val) {
+                    return val.toUpperCase();
+                },
+                slice(val, n) {
+                    return val.slice(n);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

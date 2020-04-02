@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            #box {
+                position: absolute;
+                left: 200px;
+                top: 200px;
+                width: 300px;
+                height: 300px;
+                border: 10px solid #000;
+            }
+            #box2 {
+                position: absolute;
+                left: 200px;
+                top: 200px;
+                width: 300px;
+                height: 300px;
+                border: 10px solid #000;
+            }
+            #box3 {
+                position: absolute;
+                left: 200px;
+                top: 200px;
+                width: 300px;
+                height: 300px;
+                border: 10px solid #000;
+            }
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="box2">
+        <div id="box3"></div>
+    </div>
+</div>
+<script>
+{
+    let box3 = document.querySelector("#box3");
+    console.log(getPageOffset(box3));
+}    
+// function getPageOffset(el){
+//     let rect = el.getBoundingClientRect();
+//     let sY = scrollY;
+//     let sX = scrollX;
+//     return {
+//         left:rect.left + sX,
+//         top: rect.top + sY
+//     }
+// }
+function getPageOffset(el){
+    let l = el.offsetLeft;
+    let t = el.offsetTop;
+    while(el.offsetParent){
+        el = el.offsetParent; 
+        l += el.offsetLeft + el.clientLeft;
+        t += el.offsetTop + el.clientTop;
+    }
+    return {
+        left: l,
+        top: t
+    }
+}
+</script>    
+</body>
+</html>

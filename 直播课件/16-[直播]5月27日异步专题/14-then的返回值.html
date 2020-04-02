@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let p = new Promise((resolve,reject)=>{
+    let img = new Image();
+
+    img.src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558976367526&di=121da5a47183105b29fd73a54d9759ac&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Ff%2F5583a4fe547c6.jpg";
+    //img.src = "https://timgsa.baidu.com/c6.jpg";
+    img.onload = function(){
+        resolve("图片请求成功了");
+    };
+    img.onerror = function(){
+        reject("图片请求失败");
+    }
+});
+p.then((data)=>{
+    //console.log("resolve之后要做的事情",data);
+},(error)=>{
+    //console.log("reject之后要做的事情",error);
+}).then(()=>{
+    console.log(1);
+},()=>{
+    console.log("error");
+}).then(()=>{
+    console.log(2);
+},()=>{
+    console.log("error");
+});
+
+// then 方法本身，会返回一个新的 Promise 对象, 但是状态会有几种情况
+</script>    
+</body>
+</html>

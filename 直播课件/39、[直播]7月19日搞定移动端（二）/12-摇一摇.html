@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+shake(function(){
+    // 这里是用户摇一摇之后的操作
+    alert("您摇动了手机");
+});    
+function shake(fn){
+    /*
+        摇一摇：监听手机的加速度，如果手机的加速度有一个比较大的差值，就可以认定用户摇动了手机
+        没有办法体检预测用户使用习惯，所以，xyz都需要检测
+
+    */
+    const MAXRANGE = 60;// 当两次之间的晃动幅度超过这个数，我们就可以认定用户进行了摇一摇
+    const MINRANGE = 5;//当用户的停止了摇动手机，执行摇一摇要进行的操作
+    let lastX = 0;
+    let lastY = 0;
+    let lastZ = 0;
+    let isShake = false;
+    window.addEventListener("devicemotion",throttle((e)=>{
+        let motion = e.acceleration;
+        let x = motion.x;
+        let y = motion.y;
+        let z = motion.z;
+        let range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);//计算上一次和当前次之间晃动幅度
+        if(range >= MAXRANGE){
+            isShake = true;// 这里用进行了剧烈摇动，我们可以认定用户想要进行摇一摇操作
+        }
+        if(range <= MINRANGE
+        && isShake){
+            fn();
+            isShake = false;
+        }
+        lastX = x;
+        lastY = y;
+        lastZ = z;
+    }));
+}
+function throttle(fn,interval=200,isImmediately = false){
+        var timer;
+        return function(...arg){
+            if(timer){
+                return ;
+            }
+            if(isImmediately){
+                fn.call(_this,...arg);
+            }
+            var _this = this;
+            //fn.call(_this,...arg);
+            timer = setTimeout(()=>{
+                fn.call(_this,...arg);
+                timer = 0;
+            },interval);
+        }
+    }
+</script>    
+</body>
+</html>

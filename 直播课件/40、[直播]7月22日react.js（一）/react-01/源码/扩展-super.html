@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    
+        // function P(a) {
+        //     this.a = a;
+        // }
+
+        // // P(10);  //window.a = 10;
+
+        // function C(a) {
+        //     // P.call(a);
+        //     // P(10);  // window.a = 10;
+
+        //     // this.a = 10;
+        //     // P.call(this, a);   //c.a = 10;
+
+        // }
+
+        // let c = new C(10);
+
+
+        class P {
+            constructor(a) {
+                this.a = a;
+            }
+        }
+
+        class C extends P {
+            // constructor(a) {
+            //     super(a);   // P.call(this, a)
+            // }
+
+            // constructor(...args) {
+            //     super(...args)
+            // }
+        }
+
+    </script>
+
+</body>
+</html>

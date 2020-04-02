@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/mTween.js"></script>
+    <style>
+        body{
+            background: url(img/bg.jpg);
+            overflow: hidden;
+        }
+
+        .view{
+            width: 1000px;
+            height: 600px;
+            perspective: 600px;
+            margin: 100px auto;
+        }
+
+        .bigbox{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .box{
+            width: 200px; 
+            height: 200px;
+            /* 将元素内-开启3d渲染模式 */
+            transform-style: preserve-3d;
+            position:absolute;
+        }
+        .box span{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #DDD;
+            opacity: 0;
+            transition: 1.5s;
+        }
+        
+        .show span{
+            opacity: 1;
+        }
+
+        .box span:nth-child(1){
+            transform: translateZ(100px);
+        }
+        .box span:nth-child(2){
+            transform:rotateY(90deg) translateZ(100px);
+        }
+        .box span:nth-child(3){
+            transform:rotateY(180deg) translateZ(100px);
+        }
+        .box span:nth-child(4){
+            transform:rotateY(270deg) translateZ(100px);
+        }
+        .box span:nth-child(5){
+            transform:rotateX(90deg) translateZ(100px);
+        }
+        .box span:nth-child(6){
+            transform:rotateX(-90deg) translateZ(100px);
+        }
+
+        .box[data-z="0"] span:nth-child(1){
+            background-image: url(img/bg1.png);
+        }
+        .box[data-z="1"] span:nth-child(1){
+            background-image: url(img/bg2.png);
+        }
+
+        .box[data-z="2"] span:nth-child(1){
+            background-image: url(img/1.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .box[data-z="2"] span:nth-child(2){
+            background-image: url(img/2.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .box[data-z="2"] span:nth-child(3){
+            background-image: url(img/3.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .box[data-z="2"] span:nth-child(4){
+            background-image: url(img/4.jpg);
+            background-size: 1000px 600px;
+        }
+
+        .btnbox{ 
+            width: 400px;
+            margin: 50px auto;
+            opacity: 0;
+            transition: 1s;
+        }
+        .btnbox button{
+            width: 100px;
+            height:100px;
+            background: url(img/btn.png);
+            background-size: 100%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .btnbox button:nth-child(1){
+            transform: rotate(180deg);
+        }
+        .btnbox button:nth-child(2){
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="view">
+        <div class="bigbox">
+             
+        </div>
+        <div class="btnbox">
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+    
+</body>
+</html>

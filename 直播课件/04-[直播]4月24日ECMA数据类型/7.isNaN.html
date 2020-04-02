@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // NaN 算不算数字  not a number  人格分裂 
+        // 一个不是数字的数字 属于数据类型 但是不是一个具体的数
+
+
+        // NaN是一个值
+
+        var a=NaN; //number
+        
+        console.log(typeof a)
+
+        // NaN谁都不等于 包括它自己
+        // if(NaN==NaN){
+        //     alert('我是');
+        // }else{
+        //     alert('我不是');
+        // }
+
+        // if(isNaN(NaN)){
+        //     console.log('它是NaN');
+        // }
+
+        var a='13.5a';
+
+        var b=Number(a);
+
+        console.log(isNaN(b));
+
+
+        // isNaN() 是一个方法 它可以用来判断数字是不是NaN
+        // 当你不确定数字是否转换成功时 采用isNaN来判断
+        // 它只会返回俩个值 1. true 2. false
+
+        // if(NaN){
+        //     console.log(123)
+        // }
+
+
+    </script>
+</body>
+</html>

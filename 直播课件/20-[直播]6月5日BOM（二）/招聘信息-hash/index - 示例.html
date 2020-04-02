@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>招聘信息</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        #root,
+        #view {
+            padding-top: 10px;
+        }
+        .list-group-item-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nav a {
+            float: left;
+            margin-right: 2px;
+            line-height: 1.42857143;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            padding: 10px 15px;
+            margin-bottom: -1px;
+        }
+        .nav .active {
+            color: #555;
+            cursor: default;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-bottom-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+<div id="root" class="container">
+    <nav class="nav nav-tabs">
+        <navLink to="/sh/" activeClass="active">社会招聘</navLink>
+        <navLink to="/xy/" activeClass="active">校园招聘</navLink>
+    </nav>
+    <div id="view">
+        <Route path="/" render="renderIndex"></Route>
+        <Route path="/sh/:page" render="renderSh"></Route>
+        <Route path="/xy/:page" render="renderXy"></Route>
+        <Route path="/xy/details/:id" render="renderDetailsXy"></Route>
+        <Route path="/sh/details/:id" render="renderDetailsSh"></Route>
+    </div>
+</div>    
+<script src="js/data.js"></script>
+<script>
+{
+    let Route = document.querySelectorAll("Route");
+    let navLinks = document.querySelectorAll("navLink");
+    let routers = [...Route].map(item=>{
+        let path = item.getAttribute("path");
+        let render = item.getAttribute("render");
+        let parent = item.parentNode;
+        item.remove();
+        return {
+            parent,
+            path,
+            render,
+            props:{}
+        }
+    });
+    navLinks = [...navLinks].map(item=>{
+        let href = item.getAttribute("to");
+        let a = document.createElement("a");
+        a.href = '#'+href;
+        a.innerHTML = item.innerHTML;
+        a.active = item.getAttribute("activeClass");
+        item.parentNode.replaceChild(a,item);
+        return a;
+    });
+    function matchActive(){
+        let hash = location.hash;
+        hash = hash==""||hash=="#"?"#/sh/":hash
+        navLinks.forEach(item=>{
+            if(hash.includes(item.getAttribute("href"))){
+                item.className = item.active;
+            } else {
+                item.className = "";
+            }
+        });
+    }
+    matching();
+    function matching(){
+        let hash = location.hash;
+        hash = hash==""||hash=="#"?"/":hash.substr(1);
+        let hashArr = hash.split("/");
+        for(let i = 0; i < routers.length; i++){
+            let {path} = routers[i];
+            if(path.includes(":")){
+                let isMatch = path.split("/").every((item,index)=>{
+                    if(item[0] == ":"){
+                        routers[i].props[item.substr(1)] = hashArr[index];
+                        return true;
+                    }
+                    return item == hashArr[index];
+                });
+                isMatch = isMatch&&(path.split("/").length == hashArr.length);
+                if(isMatch){
+                    routers[i].parent.innerHTML = render(routers[i]);
+                    break;
+                }
+            } else if(path == hash){
+                routers[i].parent.innerHTML = render(routers[i]);
+                break;
+            }  
+        }
+        matchActive();
+    }
+    window.onhashchange = matching;
+    function render(route){
+       return window[route.render](route.props);
+    }
+}
+
+function renderIndex(props){
+    return renderSh({page:1})
+} 
+function renderSh(props){
+    let {page} = props;
+    page = page?page:1; 
+    return renderList({
+        page,
+        type: "sh",
+        nowData: data["society"]
+    });
+}
+function renderXy(props){
+    let {page} = props;
+    page = page?page:1; 
+    return renderList({
+        page,
+        type: "xy",
+        nowData: data["campus"]
+    });
+}   
+function renderDetailsXy(props){
+    let {id} = props;
+    return renderDetails({
+        nowData:data["campus"].filter(item=>item.id==id)[0]
+    })
+} 
+function renderDetailsSh(props){
+    let {id} = props;
+    return renderDetails({
+        nowData:data["society"].filter(item=>item.id==id)[0]
+    })
+} 
+function renderList(props){
+    let {page,nowData,type} = props;
+    page--;
+    let start = page*5;
+    let end = (page+1)*5;
+    nowPapeData = nowData.filter((item,index)=>index>=start&&index<end);
+    let inner = `
+        <ul class="list-group">
+            ${nowPapeData.map(item=>{
+                return (`
+                    <li class="list-group-item">
+                        <a href="#/${type}/details/${item.id}">
+                            <h4 class="list-group-item-heading">职位需求：${item.job} 人数：${item.nub}名</h4>
+                            <p class="list-group-item-text">${item.ask}</p>
+                        </a>
+                    </li>
+                `)
+            }).join("")}
+        </ul>    
+    `;
+    let pageLength = Math.ceil(nowData.length/5);
+    inner += `
+        <ul class="pagination">
+           ${[...("n".repeat(pageLength))].map((item,index)=>{
+               return `<li class="${index==page?"active":""}"><a href="#/${type}/${index+1}">${index+1}</a></li>`
+           }).join("")}
+        </ul>
+    `; 
+    return inner;
+}
+function renderDetails(props){
+    let {nowData} = props; 
+    let inner = `
+    <div class="panel panel-default">
+        <div class="panel-heading">招聘岗位：${nowData.job}</div>
+        <div class="panel-body">
+           <p>${nowData.ask}</p>
+           <p>招聘人数：${nowData.nub}人</p>
+           <p>发布时间：${nowData.data}</p>
+        </div>
+    </div>
+    `;
+    return inner;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="mydiv1">
+        <button style="background: red">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <p>内容一</p>
+        <p style="display: none">内容二</p>
+        <p style="display: none">内容三</p>
+    </div>
+</body>
+<script>
+    let btns = document.querySelectorAll(".mydiv1 button"); 
+    let ps = document.querySelectorAll(".mydiv1 p");
+    btns.forEach((v,k)=>{
+        btns[k].onclick = function(){
+            ps.forEach((value,key)=>{
+                if(key===k){
+                    btns[key].style.background = "red";
+                    ps[key].style.display = "block";
+                }else{
+                    btns[key].style.background = "";
+                    ps[key].style.display = "none";
+                }
+            })
+        }
+    })
+</script>
+</html>

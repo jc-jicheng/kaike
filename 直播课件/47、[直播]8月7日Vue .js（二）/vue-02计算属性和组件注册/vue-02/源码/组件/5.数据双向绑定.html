@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .kkb-radio {
+            width: 20px;
+            height: 20px;
+            background-color: #cccccc;
+        }
+        .kkb-radio.checked {
+            background-color: #92beee;
+        }
+        .plane {
+            border: 1px solid #000000;
+            width: 300px;
+        }
+        .plane .header {
+            width: 100%;
+            height: 30px;
+            background: #cccccc;
+        }
+        .plane .content {
+            height: 100px;
+            width: 100%;
+            display: none;
+        }
+        .plane.expanded .content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <kkb-radio :checked="val" @check="change"></kkb-radio> -->
+        <kkb-radio v-model="val"></kkb-radio>
+
+        <br /><br /><br />
+
+        <kkb-plane :expanded="val"></kkb-plane>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        const kkbRadio = {
+            model: {
+                // 指定v-model绑定的prop属性
+                prop: 'checked',
+                // 执行内部触发的哪个事件会修改指定的prop
+                event: 'check'
+            },
+            props: ['checked'],
+            data() {
+                return {
+                    status: this.checked
+                }
+            },
+            template: `
+                <div class="kkb-radio" :class="{'checked': status}" @click="changeStatus"></div>
+            `,
+            methods: {
+                changeStatus() {
+                    this.status = !this.status;
+
+                    this.$emit('check', this.status);
+                }
+            }
+        };
+        const kkbPlane = {
+            props: ['expanded'],
+            template: `
+                <div class="plane" :class="{'expanded': expanded}">
+                    <div class="header"></div>
+                    <div class="content"></div>
+                </div>
+            `
+        };
+        
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                val: true
+            },
+            components: {
+                'kkb-radio': kkbRadio,
+                'kkb-plane': kkbPlane
+            },
+            // methods: {
+            //     change(status) {
+            //         this.val = status;
+            //     }
+            // }
+        });
+    </script>
+</body>
+</html>

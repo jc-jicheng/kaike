@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 200px;
+            border: 1px solid #000;
+        }
+        #list li {
+            font: 14px/30px "宋体";
+        }
+        #list li:nth-child(2n) {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>列表1</li>
+    <li>列表2</li>
+    <li>列表3</li>
+    <li>列表4</li>
+    <li>列表5</li>
+</ul>    
+<script>
+{
+    // 给 list 下 所有的 li 添加一个点击事件
+    let list = document.querySelector("#list");
+    let nub = 0;
+    setInterval(()=>{
+        list.innerHTML += `<li>这是第${nub++}个新LI</li>`
+    },1000);
+    // 点击 li 获取 li innerHTML
+    list.addEventListener("click",function(e){
+        // e.target 事件源：事件距离触发在哪个元素上
+        //console.log("点击",e.target.tagName);
+        if(e.target.tagName == "LI"){
+            console.log(e.target.innerHTML);
+        }
+    });
+    // 事件代理(事件委托)：利用冒泡机制将事件统一委托在父级上执行，在通过事件源获取到相关元素
+}
+</script>
+</body>
+</html>

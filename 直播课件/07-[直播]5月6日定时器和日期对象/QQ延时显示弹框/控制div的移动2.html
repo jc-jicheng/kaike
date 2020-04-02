@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="button" value="开">
+    <input type="button" value="停">
+    <div></div>
+    <script>
+        var left=0;
+        var timer=null;
+        var btns=document.querySelectorAll('input');
+        var div=document.querySelector('div');
+
+
+        btns[0].onclick=function(){
+            // 在开启定时器之前，最好先清除之前的定时器
+            clearInterval(timer);
+            timer=setInterval(function(){
+                left+=5;
+                div.style.left=left+'px';
+            },30);
+        }
+
+        btns[1].onclick=function(){
+            clearInterval(timer);
+        }
+       
+
+    </script>
+</body>
+</html>

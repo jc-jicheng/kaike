@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function fn(){
+        //     console.log(arguments)
+
+        //     //arguments[1]
+        // }
+
+        // fn(1,2,3,4,5,6)
+
+        function add(a){
+            console.log(a);
+            console.log(this)
+        }
+
+        //fn.bind()
+        // bind(fn,指向的位置)
+        function bind(fn,obj){
+            console.log(arguments[1]);
+            return function(){
+                fn.call(obj,...arguments);
+            }
+        }
+
+        // 1. bind返回的是一个函数
+        // 2. 调用返回的函数 可以改变 函数下的this指向
+    //    var newFn= bind(add,document.body);
+    //    newFn();
+
+       bind(add,document)(66);
+    //    console.log(newFn);
+
+
+    </script>
+</body>
+</html>

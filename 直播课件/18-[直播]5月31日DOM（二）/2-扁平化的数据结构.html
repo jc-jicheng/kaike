@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// let data = [
+//     {
+//         id: 0,
+//         title:" 第一级",
+//         child:[
+//             {
+//                 id: 1,
+//                 title:"第二级",
+//                 child: [{
+//                     id: 2,
+//                     title: "第三级"
+//                 },
+//                 {
+//                     id: 3,
+//                     title: "第三级"
+//                 }]
+//             }
+//         ]
+//     }
+// ];
+/*
+    id: 当前数据 id
+    pid: 父级的 id
+*/
+let data = [
+    {
+        id: 0,
+        pid: -1,
+        title: "第一级"
+    },{
+        id: 1,
+        pid: 0,
+        title: "第二级-1"
+    },{
+        id: 2,
+        pid: 0,
+        title: "第二级-1"
+    },{
+        id: 3,
+        pid: 1,
+        title: "第三级-1"
+    },{
+        id: 4,
+        pid: 2,
+        title: "第三级-3"
+    },{
+        id: 5,
+        pid: 2,
+        title: "第三级-2"
+    }
+];
+
+console.log(getParent(2));
+// 已知当前数据找父级
+function getParent(pid){
+    return data.filter(item=>item.id ==pid)[0];
+}
+
+console.log(getChild(0));
+// 已知当前数据找子级
+function getChild(id){
+    return data.filter(item=>item.pid ==id);
+}
+</script>    
+</body>
+</html>

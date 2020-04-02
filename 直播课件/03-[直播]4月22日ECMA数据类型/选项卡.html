@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+            color: gray;
+            padding: 0 30px;
+        }
+        .wrap{
+            width: 700px;
+            height: 100vh;
+            margin: 30px auto;
+            border: 1px solid rgb(167, 223, 255);
+        }
+        #nav{
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+        }
+        #nav a {
+            width: 25%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            border-bottom: 1px solid gray;
+            border-top: none;
+        }
+        #nav .active {
+            color: rgb(88, 130, 194);
+            border: 1px solid gray;
+            border-top: none;
+            border-bottom: 1px solid #fff;
+        }
+        #nav a:nth-child(1).active{
+            border-left: none;
+        }
+        #nav a:nth-child(4).active {
+            border-right: none;
+        }
+        .boards{
+            width: 100%;
+            height: 100px;
+        }
+        .boards .active{
+            display: block;
+        }
+        .boards div{
+            display: none;
+            width: 100%;
+            line-height: 100px;
+            text-indent: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <nav id="nav">
+            <a href="javascript:;" class="active">我的行程</a>
+            <a href="javascript:;">消息中心</a>
+            <a href="javascript:;">角色管理</a>
+            <a href="javascript:;">定时任务补偿</a>
+        </nav>
+        <div class="boards">
+            <div class="active">我的行程</div>
+            <div>消息中心</div>
+            <div>角色管理</div>
+            <div>定时任务补偿</div>
+        </div>
+    </div>
+    <script>
+        // 1. 给上面的四个a 按钮 添加点击事件
+        // 2. 在点击时 让 自身的class 变为active/ 同时将其他a上面的class清除掉
+        // 
+
+        var btns=document.querySelectorAll('#nav a');
+        // console.log(btns);
+
+        for(var i=0;i<btns.length;i++){
+            btns[i].onclick=function(){
+                //清除其他a标签身上的active
+                for(var j=0;j<btns.length;j++){
+                    btns[j].className='';
+                }
+
+                this.className='active';
+               
+            }
+        }
+    </script>
+</body>
+</html>

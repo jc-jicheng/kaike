@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <p>title: {{title}}</p>
+        <p>user.username: {{user.username}}</p>
+        <p>user.gender: {{user.gender}}</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    
+        let app = new Vue({
+            el: '#app',
+            data: {
+                title: 'vue 框架',
+                user: {
+                    username: 'zMouse'
+                }
+            }
+        });
+
+        let user = {
+            username: 'zMouse'
+        };
+
+        Object.defineProperty(user, 'username', {
+            get() {
+                console.log('get');
+            },
+            set() {
+                console.log('set');
+            }
+        });
+
+
+
+    </script>
+</body>
+</html>
